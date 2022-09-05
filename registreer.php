@@ -17,8 +17,16 @@ session_start();
 </head>
 <body>
 <form method='POST'>
-    <label>Gebruikersnaam</label>
-    <input type='text' name='username'>
+    <label>Voornaam</label>
+    <input type='text' name='first_name'>
+    <label>Achternaam</label>
+    <input type='text' name='last_name'>
+    <label>Leerjaar</label>
+    <select name='leerjaar'>
+        <option value='1'>Leerjaar 1</option>
+        <option value='2'>Leerjaar 2</option>
+        <option value='3'>Leerjaar 3</option>
+    </select>
     <label>Email</label>
     <input type='email' name='email'>
     <label>Wachtwoord</label>
@@ -31,12 +39,14 @@ session_start();
 <?php
   if (isset($_POST['submit'])) {
     $email = $_POST['email'];
-    $username = $_POST['username'];
+    $first_name = $_POST['first_name'];
+    $last_name = $_POST['last_name'];
+    $leerjaar = $_POST['leerjaar'];
     $password = $_POST['password'];
-    $sql = "SELECT COUNT(username) AS num FROM users WHERE username = :username";
+    $sql = "SELECT COUNT(email) AS num FROM users WHERE email = :email";
     $stmt = $pdo->prepare($sql);
     $stmt->execute(array(
-      ':username' => $username
+      ':email' => $email
     ));
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -48,17 +58,15 @@ session_start();
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($row['num'] > 0) {
-      echo '<script>alert("Gebruikersnaam bestaat al!")</script>';
-    } elseif ($row['num'] > 0) {
       echo '<script>alert("Email bestaat al!")</script>';
     } else {
-      $sql = "INSERT INTO `users` (`username`, `email`, `password`) 
-    VALUES (:username, :email, :password)";
+      $sql = "INSERT INTO `users` (`first_name`, `last_name`, `leerjaar`, `email`, `password`) 
+    VALUES (:first_name, :last_name, :leerjaar, :email, :password)";
       $sql_run = $pdo->prepare($sql);
       $result = $sql_run->execute(array(
-        ":username" => $username, ":email" => $email, ":password" => $password,
+        ":first_name" => $first_name, ":last_name" => $last_name, ":leerjaar" => $leerjaar, ":email" => $email, ":password" => $password,
       ));
-    // header("Location: login.php");
+    header("Location: login.php");
     }
   }
 ?>
