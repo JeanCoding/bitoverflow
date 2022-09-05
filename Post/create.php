@@ -1,13 +1,8 @@
 <?php 
+include('../verbinding.php');
+
 $_SESSION['user_id'] = 1;
 $errors = [];
-
-try {
-    $conn = new PDO("mysql:host=localhost;dbname=bitoverflow", 'root', '');
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch(PDOException $e) {
-    echo "Connection failed: " . $e->getMessage() . "<br>";
-}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($_POST['subject'])) {
@@ -31,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($errors)) {
         $date = date('Y-m-d H:i:s');
         $sql = "INSERT INTO posts (subject, content, category_id, user_id, date) VALUES (:subject, :content, :category, :user, :date)";
-        $stmt = $conn->prepare($sql);
+        $stmt = $pdo->prepare($sql);
 
         $stmt->bindParam(':subject', $subject);
         $stmt->bindParam(':content', $content);
@@ -60,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <select name="category" id="category" required>
             <?php 
                 $sql = "SELECT * FROM categories";
-                $stmt = $conn->prepare($sql);
+                $stmt = $pdo->prepare($sql);
                 $stmt->execute();
                 $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 foreach ($categories as $category) {
