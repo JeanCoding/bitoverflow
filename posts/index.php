@@ -23,11 +23,13 @@ $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <body>
     <a href="./create.php">Post aanmaken</a>
     <?php foreach($posts as $post): ?>
-        <h1><?php echo $post['subject']; ?></h1>
-        <p><?php echo $post['content']; ?></p>
-        <p><?php echo $post['category']; ?></p>
-        <p><?php echo $post['username']; ?></p>
-        <p><?php echo $post['date']; ?></p>
+        <a href="/posts/show.php/<?php echo $post['id']; ?>" style="text-decoration: inherit; color: inherit;">
+            <h1><?php echo $post['subject']; ?></h1>
+            <p><?php echo $post['content']; ?></p>
+            <p><?php echo $post['category']; ?></p>
+            <p><?php echo $post['username']; ?></p>
+            <p><?php echo $post['date']; ?></p>
+        </a>
     <?php endforeach; ?>
 </body>
 </html>

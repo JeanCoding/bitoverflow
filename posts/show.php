@@ -33,6 +33,7 @@ if (empty($post)) {
     <title>BitOverflow | Post <?php $postId ?></title>
 </head>
 <body>
+    <a href="/posts/index.php">Terug</a>
     <h1><?php echo $post['subject'] ?></h1>
     <p><?php echo $post['content'] ?></p>
     <p><b>Geplaatst door:</b> <?php echo $post['username'] ?></p>
