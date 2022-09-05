@@ -35,6 +35,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bindParam(':date', $date);
 
         $stmt->execute();
+
+        header('Location: ./index.php');
     }
 }
 
