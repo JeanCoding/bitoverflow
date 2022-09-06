@@ -1,4 +1,5 @@
 <?php
+session_start();
 include "verbinding.php";
 ?>
 
@@ -41,8 +42,10 @@ if (isset($_POST['submit'])) {
         foreach ($rows as $row) {
             if ($count == 1 && !empty($row)) {
                 $username = $row['username'];
-                $_SESSION['username'] = $username;
-                echo "<script>alert('Je bent ingelogd als $username!')</script>";
+                $userId = $row['id'];
+                $_SESSION['user']['name'] = $username;
+                $_SESSION['user']['id'] = $userId;
+                header('Location: index.php');
             } else {
                 echo "<script>alert('Verkeerd gebruikersnaam en/of wachtwoord!');</script>";
             }

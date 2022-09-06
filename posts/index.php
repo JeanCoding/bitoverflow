@@ -1,4 +1,10 @@
 <?php
+session_start();
+
+if (!isset($_SESSION['user'])) {
+    header('Location: login.php');
+}
+
 include('../verbinding.php');
 
 $sql = 'SELECT posts.*, users.username as username, categories.name as category FROM posts 
@@ -21,7 +27,8 @@ $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <title>BitOverflow | Posts</title>
 </head>
 <body>
-    <a href="./create.php">Post aanmaken</a>
+    <a href="/posts/create.php">Post aanmaken</a>
+    <a href="/index.php">Home</a>
     <?php foreach($posts as $post): ?>
         <a href="/posts/show.php/<?php echo $post['id']; ?>" style="text-decoration: inherit; color: inherit;">
             <h1><?php echo $post['subject']; ?></h1>

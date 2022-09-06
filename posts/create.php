@@ -1,4 +1,10 @@
 <?php 
+session_start();
+
+if (!isset($_SESSION['user'])) {
+    header('Location: login.php');
+}
+
 include('../verbinding.php');
 
 $_SESSION['user_id'] = 1;
@@ -31,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bindParam(':subject', $subject);
         $stmt->bindParam(':content', $content);
         $stmt->bindParam(':category', $category);
-        $stmt->bindParam(':user', $_SESSION['user_id']);
+        $stmt->bindParam(':user', $_SESSION['user']['id']);
 
         $stmt->execute();
 
