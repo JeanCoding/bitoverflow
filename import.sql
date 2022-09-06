@@ -44,9 +44,11 @@ CREATE TABLE votes (
     vote boolean NOT NULL,
     comment_id int(11) NOT NULL,
     user_id int(11) NOT NULL,
+    comment_user_id int(11) NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (comment_id) REFERENCES comments(id),
-    FOREIGN KEY (user_id) REFERENCES users(id)
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (comment_user_id) REFERENCES users(id)
 );
 
 INSERT INTO users (username, email, password) VALUES ('admin', 'admin@bitoverflow.nl', 'admin');
