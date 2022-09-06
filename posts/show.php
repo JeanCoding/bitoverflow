@@ -28,12 +28,6 @@ if (empty($post)) {
     exit;
 }
 
-$sql = 'SELECT * FROM comments WHERE solution = 1 AND post_id = :id';
-$stmt = $pdo->prepare($sql);
-$stmt->execute(['id' => $postId]);
-
-$solutionKnown = $stmt->rowCount() > 0;
-
 ?>
 
 <!DOCTYPE html>
