@@ -109,8 +109,8 @@ $solutionKnown = $stmt->rowCount() > 0;
                         <input type="hidden" name="comment_user_id" value="<?php echo $comment['commentUserId'] ?>">
                         <input type="hidden" name="post_id" value="<?php echo $postId ?>">
                         <input type="hidden" name="user_id" value="<?php echo $_SESSION['user']['id'] ?>">
-                        <input type="submit" name="mark" value="Markeren als oplossing"
-                            <?php if ($comment['user_id'] == $_SESSION['user']['id'] || $solutionKnown) echo 'disabled'; ?>
+                        <input type="submit" name="mark" value="<?php echo $comment['solution'] == 1 ? 'Markering ongedaan maken' : 'Markeren als oplossing' ?>"
+                            <?php if ($comment['user_id'] == $_SESSION['user']['id']) echo 'disabled'; ?>
                         >
                     </form>
                 <?php }
