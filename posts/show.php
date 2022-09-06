@@ -5,7 +5,7 @@ $explodedUri = explode('/', $_SERVER['REQUEST_URI']);
 
 if (isset($explodedUri[3]) && $explodedUri[3] != '') {
     $postId = $explodedUri[3];
-    $sql = "SELECT posts.*, users.name as username, categories.name as category FROM posts
+    $sql = "SELECT posts.*, users.username as username, categories.name as category FROM posts
             INNER JOIN users ON posts.user_id = users.id
             INNER JOIN categories ON posts.category_id = categories.id
             WHERE posts.id = $postId LIMIT 1";
@@ -51,7 +51,7 @@ if (empty($post)) {
             </form>
         </div>
         <?php
-            $sql = "SELECT comments.*, users.name as username FROM comments
+            $sql = "SELECT comments.*, users.username as username FROM comments
                     INNER JOIN users ON comments.user_id = users.id
                     WHERE comments.post_id = $postId
                     ORDER BY comments.date DESC";
