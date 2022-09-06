@@ -76,19 +76,19 @@ $lastPost = $stmt->fetch(PDO::FETCH_ASSOC);
     </div>
     <div>
         <h2>Beste studenten</h2>
-        <ul>
+        <ol>
             <?php
-                $sql = "SELECT * FROM users";
+                $sql = 'SELECT * FROM users ORDER BY reputation DESC LIMIT 3';
                 $stmt = $pdo->prepare($sql);
                 $stmt->execute();
 
                 $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                 foreach ($users as $user) {
-                    echo '<li>' . $user['username'] . '</li>';
+                    echo '<li>' . $user['username'] . ' heeft ' . $user['reputation'] . ' studenten geholpen.</li>';
                 }
             ?>
-        </ul>
+        </ol>
     </div>
     <div>
         <h2>Een kijkje in je statistieken</h2>

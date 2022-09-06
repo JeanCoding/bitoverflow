@@ -17,10 +17,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !$solutionKnown) {
     $postId = $_POST['post_id'];
     $commentId = $_POST['comment_id'];
     $userId = $_SESSION['user']['id'];
+    $commentUserId = $_POST['comment_user_id'];
 
     $sql = 'UPDATE comments SET solution = 1 WHERE id = :id';
     $stmt = $pdo->prepare($sql);
     $stmt->execute(['id' => $commentId]);
+
+    $sql = 'UPDATE users SET reputation = reputation + 1 WHERE id = :id';
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute(['id' => $commentUserId]);
 
     header('Location: /posts/show.php/' . $postId);
 }

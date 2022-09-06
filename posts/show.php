@@ -106,6 +106,7 @@ $solutionKnown = $stmt->rowCount() > 0;
                 if ($post['user_id'] == $_SESSION['user']['id']) { ?>
                     <form action="/posts/actions/mark.php" method="POST">
                         <input type="hidden" name="comment_id" value="<?php echo $comment['id'] ?>">
+                        <input type="hidden" name="comment_user_id" value="<?php echo $comment['commentUserId'] ?>">
                         <input type="hidden" name="post_id" value="<?php echo $postId ?>">
                         <input type="hidden" name="user_id" value="<?php echo $_SESSION['user']['id'] ?>">
                         <input type="submit" name="mark" value="Markeren als oplossing"
