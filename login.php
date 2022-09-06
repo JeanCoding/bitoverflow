@@ -3,7 +3,9 @@ include "verbinding.php";
 ?>
 
 <html>
-    <head></head>
+    <head><script src="https://cdn.tailwindcss.com"></script>
+    <title>BitOverflow | Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /></head>
     <body>
         <form method='POST'>
             <label for="username">Gebruikersnaam</label>
