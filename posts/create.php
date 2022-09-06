@@ -25,14 +25,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (empty($errors)) {
         $date = date('Y-m-d H:i:s');
-        $sql = "INSERT INTO posts (subject, content, category_id, user_id, date) VALUES (:subject, :content, :category, :user, :date)";
+        $sql = "INSERT INTO posts (subject, content, category_id, user_id) VALUES (:subject, :content, :category, :user)";
         $stmt = $pdo->prepare($sql);
 
         $stmt->bindParam(':subject', $subject);
         $stmt->bindParam(':content', $content);
         $stmt->bindParam(':category', $category);
         $stmt->bindParam(':user', $_SESSION['user_id']);
-        $stmt->bindParam(':date', $date);
 
         $stmt->execute();
 
