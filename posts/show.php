@@ -57,7 +57,7 @@ if (empty($post)) {
             </form>
         </div>
         <?php
-            $sql = "SELECT comments.*, users.username as username FROM comments
+            $sql = "SELECT comments.*, users.username as username, users.id as commentUserId FROM comments
                     INNER JOIN users ON comments.user_id = users.id
                     WHERE comments.post_id = $postId
                     ORDER BY comments.date DESC";
@@ -85,6 +85,7 @@ if (empty($post)) {
                     <form action="/posts/vote.php" method="POST">
                         <input type="hidden" name="comment_id" value="<?php echo $comment['id'] ?>">
                         <input type="hidden" name="post_id" value="<?php echo $postId ?>">
+                        <input type="hidden" name="comment_user_id" value="<?php echo $comment['commentUserId'] ?>">
                         <input type="hidden" name="user_id" value="<?php echo $_SESSION['user']['id'] ?>">
                         <input type="submit" name="vote" value="Upvote"
                             <?php if ($comment['user_id'] == $_SESSION['user']['id']) echo 'disabled'; ?>
