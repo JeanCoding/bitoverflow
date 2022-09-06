@@ -1,5 +1,4 @@
 <?php
-include "verbinding.php";
 session_start();
 ?>
 
