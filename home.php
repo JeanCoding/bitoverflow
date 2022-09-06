@@ -1,11 +1,16 @@
 <?php
+session_start();
+
+if (!isset($_SESSION['user'])) {
+    header('Location: login.php');
+}
 include "verbinding.php";
 ?>
 
 <html>
 <head>
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>BitOverflow | Registreer</title>
+    <title>BitOverflow | Home</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 <body class='bg-neutral-800'>

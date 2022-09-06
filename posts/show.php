@@ -1,5 +1,9 @@
 <?php
-$_SESSION['user_id'] = 2;
+session_start();
+
+if (!isset($_SESSION['user'])) {
+    header('Location: login.php');
+}
 
 include('../verbinding.php');
 
@@ -81,12 +85,12 @@ if (empty($post)) {
                     <form action="/posts/vote.php" method="POST">
                         <input type="hidden" name="comment_id" value="<?php echo $comment['id'] ?>">
                         <input type="hidden" name="post_id" value="<?php echo $postId ?>">
-                        <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id'] ?>">
+                        <input type="hidden" name="user_id" value="<?php echo $_SESSION['user']['id'] ?>">
                         <input type="submit" name="vote" value="Upvote"
-                            <?php if ($comment['user_id'] === $_SESSION['user_id']) echo 'disabled'; ?>
+                            <?php if ($comment['user_id'] == $_SESSION['user']['id']) echo 'disabled'; ?>
                         >
                         <input type="submit" name="vote" value="Downvote" 
-                            <?php if ($comment['user_id'] === $_SESSION['user_id']) echo 'disabled'; ?>
+                            <?php if ($comment['user_id'] == $_SESSION['user']['id']) echo 'disabled'; ?>
                         >
                         <span><?php echo($upvotes - $downvotes) ?></span>
                     </form>
