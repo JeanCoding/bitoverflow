@@ -7,6 +7,6 @@
     <title>BitOverflow | Home</title>
 </head>
 <body>
-    <a href="Post/create.php">Nieuwe post</a>
+    <a href="/posts/create.php">Nieuwe post</a>
 </body>
 </html>
