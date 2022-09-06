@@ -1,4 +1,6 @@
 <?php
+$_SESSION['user_id'] = 2;
+
 include('../verbinding.php');
 
 $explodedUri = explode('/', $_SERVER['REQUEST_URI']);
@@ -61,10 +63,34 @@ if (empty($post)) {
             $comments = $stmt->fetchAll();
 
             foreach ($comments as $comment) {
+                $sql = "SELECT * FROM votes WHERE comment_id = {$comment['id']} AND vote = 1";
+                $stmt = $pdo->prepare($sql);
+                $stmt->execute();
+                $upvotes = $stmt->rowCount();
+
+                $sql = "SELECT * FROM votes WHERE comment_id = {$comment['id']} AND vote = 0";
+                $stmt = $pdo->prepare($sql);
+                $stmt->execute();
+                $downvotes = $stmt->rowCount();
+
                 echo '<div>';
                 echo '<p>' . $comment['content'] . '</p>';
                 echo '<p><b>Geplaatst door:</b> ' . $comment['username'] . '</p>';
                 echo '<p><b>Geplaatst op:</b> ' . $comment['date'] . '</p>';
+                ?>
+                    <form action="/posts/vote.php" method="POST">
+                        <input type="hidden" name="comment_id" value="<?php echo $comment['id'] ?>">
+                        <input type="hidden" name="post_id" value="<?php echo $postId ?>">
+                        <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id'] ?>">
+                        <input type="submit" name="vote" value="Upvote"
+                            <?php if ($comment['user_id'] === $_SESSION['user_id']) echo 'disabled'; ?>
+                        >
+                        <input type="submit" name="vote" value="Downvote" 
+                            <?php if ($comment['user_id'] === $_SESSION['user_id']) echo 'disabled'; ?>
+                        >
+                        <span><?php echo($upvotes - $downvotes) ?></span>
+                    </form>
+                <?php
                 echo '</div>';
             }
         ?>
