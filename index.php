@@ -17,6 +17,7 @@ if (!isset($_SESSION['user'])) {
     <?php var_dump($_SESSION); ?>
     <a href="/posts/create.php">Nieuwe post</a>
     <a href="/posts/index.php">Posts</a>
+    <a href="/profile.php">Profiel</a>
     <a href="/logout.php">Log uit</a>
 </body>
 </html>
