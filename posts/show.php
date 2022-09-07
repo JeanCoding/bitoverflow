@@ -11,13 +11,13 @@ $explodedUri = explode('/', $_SERVER['REQUEST_URI']);
 
 if (isset($explodedUri[3]) && $explodedUri[3] != '') {
     $postId = $explodedUri[3];
-    $sql = "SELECT posts.*, users.username as username, categories.name as category FROM posts
+    $sql = 'SELECT posts.*, CONCAT_WS(" ", users.first_name, users.last_name) as username, categories.name as category FROM posts
             INNER JOIN users ON posts.user_id = users.id
             INNER JOIN categories ON posts.category_id = categories.id
-            WHERE posts.id = $postId LIMIT 1";
+            WHERE posts.id = :post_id LIMIT 1';
 
     $stmt = $pdo->prepare($sql);
-    $stmt->execute();
+    $stmt->execute(['post_id' => $postId]);
     $post = $stmt->fetch();
 } else {
     header('Location: /posts/index.php');
@@ -50,20 +50,20 @@ if (empty($post)) {
     <div>
         <h2>Reacties</h2>
         <div>
-            <form action="/posts/reply.php" method="post">
+            <form action="/posts/actions/reply.php" method="post">
                 <input type="hidden" name="post_id" value="<?php echo $postId ?>">
                 <textarea name="content" placeholder="Reactie plaatsen"></textarea>
                 <input type="submit" value="Reageer">
             </form>
         </div>
         <?php
-            $sql = "SELECT comments.*, users.username as username, users.id as commentUserId FROM comments
+            $sql = 'SELECT comments.*, CONCAT_WS(" ", users.first_name, users.last_name) as username, users.id as commentUserId FROM comments
                     INNER JOIN users ON comments.user_id = users.id
-                    WHERE comments.post_id = $postId
-                    ORDER BY comments.date DESC";
+                    WHERE comments.post_id = :post_id
+                    ORDER BY comments.date DESC';
 
             $stmt = $pdo->prepare($sql);
-            $stmt->execute();
+            $stmt->execute(['post_id' => $postId]);
             $comments = $stmt->fetchAll();
 
             foreach ($comments as $comment) {
@@ -82,7 +82,7 @@ if (empty($post)) {
                 echo '<p><b>Geplaatst door:</b> ' . $comment['username'] . '</p>';
                 echo '<p><b>Geplaatst op:</b> ' . $comment['date'] . '</p>';
                 ?>
-                    <form action="/posts/vote.php" method="POST">
+                    <form action="/posts/actions/vote.php" method="POST">
                         <input type="hidden" name="comment_id" value="<?php echo $comment['id'] ?>">
                         <input type="hidden" name="post_id" value="<?php echo $postId ?>">
                         <input type="hidden" name="comment_user_id" value="<?php echo $comment['commentUserId'] ?>">
@@ -97,6 +97,21 @@ if (empty($post)) {
                     </form>
                 <?php
                 echo '</div>';
+                if ($post['user_id'] == $_SESSION['user']['id']) { ?>
+                    <form action="/posts/actions/mark.php" method="POST">
+                        <input type="hidden" name="comment_id" value="<?php echo $comment['id'] ?>">
+                        <input type="hidden" name="comment_user_id" value="<?php echo $comment['commentUserId'] ?>">
+                        <input type="hidden" name="post_id" value="<?php echo $postId ?>">
+                        <input type="hidden" name="user_id" value="<?php echo $_SESSION['user']['id'] ?>">
+                        <input type="submit" name="mark" value="<?php echo $comment['solution'] == 1 ? 'Markering ongedaan maken' : 'Markeren als oplossing' ?>"
+                            <?php if ($comment['user_id'] == $_SESSION['user']['id']) echo 'disabled'; ?>
+                        >
+                    </form>
+                <?php }
+                if ($comment['solution'] == 1) {
+                    echo '<p style="color: green;">Gemarkeerd als oplossing.</p>';
+                }
+                echo '<hr>';
             }
         ?>
     </div>

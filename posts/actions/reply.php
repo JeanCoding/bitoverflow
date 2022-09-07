@@ -5,7 +5,7 @@ if (!isset($_SESSION['user'])) {
     header('Location: login.php');
 }
 
-include('../verbinding.php');
+include('../../verbinding.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $postId = $_POST['post_id'];

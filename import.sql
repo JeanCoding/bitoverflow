@@ -6,10 +6,11 @@ CREATE TABLE users (
     id int(11) AUTO_INCREMENT,
     first_name varchar(255) NOT NULL,
     last_name varchar(255) NOT NULL,
-    leerjaar int(11) NOT NULL,
     img_url varchar(255) NOT NULL,
+    school_year int(11) NOT NULL,
     email varchar(255) NOT NULL,
     password varchar(255) NOT NULL,
+    reputation int(11) NOT NULL DEFAULT 0,
     PRIMARY KEY (id)
 );
 
@@ -38,6 +39,7 @@ CREATE TABLE comments (
     post_id int(11) NOT NULL,
     user_id int(11) NOT NULL,
     `date` datetime DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    solution boolean NOT NULL DEFAULT 0,
     PRIMARY KEY (id),
     FOREIGN KEY (post_id) REFERENCES posts(id),
     FOREIGN KEY (user_id) REFERENCES users(id)
@@ -63,5 +65,5 @@ CREATE TABLE scores (
     FOREIGN KEY (post_id) REFERENCES posts(id)
 );
 
+INSERT INTO users (first_name, last_name, school_year, email, password) VALUES ('Admin', 'Bitoverflow', 2, 'admin@bitoverflow.nl', 'admin');
 INSERT INTO categories (name) VALUES ('PHP'), ('MySQL'), ('HTML'), ('CSS'), ('JavaScript');
-INSERT INTO users (first_name, last_name, leerjaar, email, password) VALUES ('admin', 'admin', '3', 'admin@bitoverflow.nl', 'admin');

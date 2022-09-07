@@ -5,7 +5,7 @@ if (!isset($_SESSION['user'])) {
     header('Location: login.php');
 }
 
-include '../verbinding.php';
+include '../../verbinding.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($_POST['comment_user_id'] == $_SESSION['user']['id']) {
