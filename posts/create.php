@@ -29,13 +29,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $category = $_POST['category'];
     }
 
+    $code = $_POST['code'];
+
     if (empty($errors)) {
         $date = date('Y-m-d H:i:s');
-        $sql = "INSERT INTO posts (subject, content, category_id, user_id) VALUES (:subject, :content, :category, :user)";
+        $sql = "INSERT INTO posts (subject, content, code, category_id, user_id) VALUES (:subject, :content, :code, :category, :user)";
         $stmt = $pdo->prepare($sql);
 
         $stmt->bindParam(':subject', $subject);
         $stmt->bindParam(':content', $content);
+        $stmt->bindParam(':code', $code);
         $stmt->bindParam(':category', $category);
         $stmt->bindParam(':user', $_SESSION['user']['id']);
 
@@ -109,7 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <h3 class='text-xl lg:text-sm ml-3 mt-3 font-bold pl-2'>OMSCHRIJVING</h3>
                             <textarea class="text-xl lg:text-lg ml-3 font-bold bg-neutral-800 mt-2 pr-10 py-1 pl-2 rounded-lg placeholder:text-neutral-400 text-white outline-none" rows="8" cols="60" name="content" id="content" placeholder="Vul hier de omschrijving van je vraag in"></textarea>
                             <h3 class='text-xl lg:text-sm ml-3 mt-3 font-bold pl-2'>CODE</h3>
-                            <textarea class="text-xl lg:text-lg ml-3 font-bold bg-neutral-800 mt-2 pr-10 py-1 pl-2 rounded-lg placeholder:text-neutral-400 text-white outline-none" rows="4" cols="60" name="content" id="content" placeholder="Hier kan je jou code toevoegen"></textarea>
+                            <textarea class="text-xl lg:text-lg ml-3 font-bold bg-neutral-800 mt-2 pr-10 py-1 pl-2 rounded-lg placeholder:text-neutral-400 text-white outline-none" rows="4" cols="60" name="code" id="code" placeholder="Hier kan je jou code toevoegen"></textarea>
                             <div class="w-[710px] flex justify-center">
                                 <input class="bg-white text-black p-2 rounded-full text-xl px-8 mt-8 flex justify-center cursor-pointer bg-white hover:bg-gray-200 ease-in-out duration-300" style='font-family: Laro' type="submit" value="POST">
                             </div>

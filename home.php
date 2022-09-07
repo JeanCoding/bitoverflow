@@ -81,7 +81,7 @@ include "verbinding.php";
                     </p>
 <div class='bg-black text-white p-4 hidden lg:block rounded-2xl'>
     <code>
-        <?php echo $row['code'];?>
+        <?php echo htmlspecialchars($row['code']);?>
     </code></div>
     <form method='POST'>
 <div class='w-full flex justify-between items-center mt-12 text-3xl font-bold'>
