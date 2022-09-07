@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
             </div>
 
-            <form action="/login.php" method="POST" class="flex flex-col items-center mt-20">
+            <form method="POST" class="flex flex-col items-center mt-20">
                 <p style="font-family: Laro;" class="mb-2 text-white">E-MAIL:</p>
                 <input type="email" class="rounded-full px-3 py-2 text-white outline-none" style="background-color: #3D3D3D; font-family: Laro;" name="email" placeholder="E-MAIL" ></input>
                 <p style="font-family: Laro;" class="mb-2 mt-4 text-white">WACHTWOORD:</p>
@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </form>
 
         <div class="flex justify-center">
-            <p style="color:white; font-family: Laro;" class="absolute bottom-4 font-light">GEEN ACCOUNT? <a href="" style="font-family: Laro;" class="text-sky-500 hover:text-sky-700 ease-in-out duration-300">REGISTREER</a></p>
+            <p style="color:white; font-family: Laro;" class="absolute bottom-4 font-light">GEEN ACCOUNT? <a href="registreer.php" style="font-family: Laro;" class="text-sky-500 hover:text-sky-700 ease-in-out duration-300">REGISTREER</a></p>
         </div>
 
     </body>
