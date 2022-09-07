@@ -35,7 +35,7 @@ $stmt->execute();
 
 $totalPosts = $stmt->rowCount();
 
-$sql = 'SELECT posts.*, users.username as username, categories.name as category FROM posts
+$sql = 'SELECT posts.*, CONCAT_WS(" ", users.first_name, users.last_name) AS username, categories.name as category FROM posts
         INNER JOIN users ON posts.user_id = users.id 
         INNER JOIN categories ON posts.category_id = categories.id
         WHERE user_id = :id 
@@ -61,17 +61,19 @@ $lastPost = $stmt->fetch(PDO::FETCH_ASSOC);
     <div>
         <h1>Jou eigen profiel</h1>
         <form action="/profile.php" method="POST">
-            <label for="username">GEBRUIKERSNAAM</label>
-            <input type="text" name="username" id="username" placeholder="Gebruikersnaam" value="<?php echo $user['username']; ?>">
+            <label for="username">NAAM</label>
+            <input type="text" name="username" id="username" placeholder="Naam" value="<?php echo $user['first_name'] . ' ' . $user['last_name']; ?>">
             <label for="email">E-MAIL</label>
             <input type="email" name="email" id="email" placeholder="E-mail" value="<?php echo $user['email']; ?>">
+            <label for="email">LEERJAAR</label>
+            <input type="text" name="school_year" id="school_year" placeholder="E-mail" value="<?php echo $user['school_year']; ?>e leerjaar">
             <label for="password">WACHTWOORD</label>
             <input type="password" name="password" id="password" placeholder="Wachtwoord" value="<?php echo $user['password']; ?>">
             <label for="profile_picture_url">PROFIELFOTO URL</label>
             <input type="text" name="profile_picture_url" id="profile_picture_url" placeholder="Profielfoto URL">
             <label for="biography">BIOGRAFIE</label>
             <textarea name="biography" id="biography" cols="30" rows="10" placeholder="Biografie"></textarea>
-            <input type="submit" name="submit" value="Verander">
+            <input type="submit" name="submit" value="CHANGE">
         </form>
     </div>
     <div>
@@ -85,7 +87,7 @@ $lastPost = $stmt->fetch(PDO::FETCH_ASSOC);
                 $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                 foreach ($users as $user) {
-                    echo '<li>' . $user['username'] . ' heeft ' . $user['reputation'] . ' studenten geholpen.</li>';
+                    echo '<li>' . $user['first_name'] . ' ' . $user['last_name'] . ' heeft ' . $user['reputation'] . ' studenten geholpen.</li>';
                 }
             ?>
         </ol>

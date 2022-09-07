@@ -4,7 +4,9 @@ USE bitoverflow;
 
 CREATE TABLE users (
     id int(11) AUTO_INCREMENT,
-    username varchar(255) NOT NULL,
+    first_name varchar(255) NOT NULL,
+    last_name varchar(255) NOT NULL,
+    school_year int(11) NOT NULL,
     email varchar(255) NOT NULL,
     password varchar(255) NOT NULL,
     reputation int(11) NOT NULL DEFAULT 0,
@@ -53,5 +55,5 @@ CREATE TABLE votes (
     FOREIGN KEY (comment_user_id) REFERENCES users(id)
 );
 
-INSERT INTO users (username, email, password) VALUES ('admin', 'admin@bitoverflow.nl', 'admin');
+INSERT INTO users (first_name, last_name, school_year, email, password) VALUES ('Admin', 'Bitoverflow', 2, 'admin@bitoverflow.nl', 'admin');
 INSERT INTO categories (name) VALUES ('PHP'), ('MySQL'), ('HTML'), ('CSS'), ('JavaScript');
