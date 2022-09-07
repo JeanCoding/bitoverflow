@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if (empty($_POST['school_year'])) {
         $errors['school_year'] = 'Schooljaar is verplicht';
-    } elseif (!preg_match('/^[0-4]/', $_POST['school_year'])) {
+    } elseif (!preg_match('/^[1-3]/', $_POST['school_year'])) {
         $errors['school_year'] = 'Schooljaar is ongeldig';
     } else {
         $school_year = substr($_POST['school_year'], 0, 1);
