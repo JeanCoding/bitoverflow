@@ -7,7 +7,7 @@ if (!isset($_SESSION['user'])) {
 
 include('../verbinding.php');
 
-$sql = 'SELECT posts.*, users.username as username, categories.name as category FROM posts 
+$sql = 'SELECT posts.*, CONCAT_WS(" ", users.first_name, users.last_name) as username, categories.name as category FROM posts 
         INNER JOIN users ON posts.user_id = users.id 
         INNER JOIN categories ON posts.category_id = categories.id 
         ORDER BY posts.date DESC';

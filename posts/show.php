@@ -11,13 +11,13 @@ $explodedUri = explode('/', $_SERVER['REQUEST_URI']);
 
 if (isset($explodedUri[3]) && $explodedUri[3] != '') {
     $postId = $explodedUri[3];
-    $sql = "SELECT posts.*, users.username as username, categories.name as category FROM posts
+    $sql = 'SELECT posts.*, CONCAT_WS(" ", users.first_name, users.last_name) as username, categories.name as category FROM posts
             INNER JOIN users ON posts.user_id = users.id
             INNER JOIN categories ON posts.category_id = categories.id
-            WHERE posts.id = $postId LIMIT 1";
+            WHERE posts.id = :post_id LIMIT 1';
 
     $stmt = $pdo->prepare($sql);
-    $stmt->execute();
+    $stmt->execute(['post_id' => $postId]);
     $post = $stmt->fetch();
 } else {
     header('Location: /posts/index.php');
@@ -57,13 +57,13 @@ if (empty($post)) {
             </form>
         </div>
         <?php
-            $sql = "SELECT comments.*, users.username as username, users.id as commentUserId FROM comments
+            $sql = 'SELECT comments.*, CONCAT_WS(" ", users.first_name, users.last_name) as username, users.id as commentUserId FROM comments
                     INNER JOIN users ON comments.user_id = users.id
-                    WHERE comments.post_id = $postId
-                    ORDER BY comments.date DESC";
+                    WHERE comments.post_id = :post_id
+                    ORDER BY comments.date DESC';
 
             $stmt = $pdo->prepare($sql);
-            $stmt->execute();
+            $stmt->execute(['post_id' => $postId]);
             $comments = $stmt->fetchAll();
 
             foreach ($comments as $comment) {
