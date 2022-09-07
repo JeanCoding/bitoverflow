@@ -86,17 +86,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
         <div class='px-4 lg:pl-10 pt-8 bg-neutral-900 pb-12 md:pb-48 w-full' style='box-shadow: 0px 4px 40px 2px rgba(0, 0, 0, 0.25);'>
             <h2 class='text-white  text-2xl lg:text-4xl mb-6' style='font-family: Poppins'>Stel hier een vraag Jean!</h2>
-            <div class='bg-neutral-700 text-white py-8 px-7 rounded-3xl lg:w-[900px]' style='font-family: Poppins'>
+            <div class='bg-neutral-700 text-white py-6 lg:py-8 px-7 rounded-3xl lg:w-[900px]' style='font-family: Poppins'>
                 <div class='mt-2 flex'>
                     <div>
                         <div class='flex items-center'><span class='flex items-center justify-center mt-4 font-bold text-2xl rounded-full'><img src='../images/profile.png' class='pr-2'></span></div>
                     </div>
                     <div>
-                        <form class='w-[250px]' method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-                            <h3 class='text-xl lg:text-sm ml-3 font-bold pl-2'>NAAM</h3>
-                            <input class='text-xl lg:text-lg ml-3 font-bold bg-neutral-800 pr-2 mt-2 py-1 pl-2 rounded-lg text-neutral-400' disabled placeholder="Jean Kalo"></input>
-                            <h3 class='text-xl lg:text-sm ml-3 mt-3 font-bold pl-2'>TAG</h3>
-                            <select class="text-xl lg:text-lg ml-3 font-bold bg-neutral-800 mt-2 py-1 pl-2 rounded-lg text-neutral-400 pr-32" name="category" id="category" required>
+                        <form class='lg:w-[250px]' method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+                            <h3 class='text-xl lg:text-sm lg:ml-3 font-bold pl-2'>NAAM</h3>
+                            <input class='text-xl lg:text-lg lg:ml-3 font-bold bg-neutral-800 pr-2 mt-2 py-1 pl-2 rounded-lg text-neutral-400' disabled placeholder="Jean Kalo"></input>
+                            <h3 class='text-xl lg:text-sm lg:ml-3 mt-3 font-bold pl-2'>TAG</h3>
+                            <select class="text-xl lg:text-lg lg:ml-3 font-bold bg-neutral-800 mt-2 py-1 pl-2 rounded-lg text-neutral-400 pr-32" name="category" id="category" required>
                                 <?php
                                 $sql = "SELECT * FROM categories";
                                 $stmt = $pdo->prepare($sql);
@@ -107,13 +107,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 }
                                 ?>
                             </select>
-                            <h3 class='text-xl lg:text-sm ml-3 mt-3 font-bold pl-2'>ONDERWERP</h3>
-                            <input class="text-xl lg:text-lg ml-3 font-bold bg-neutral-800 mt-2 py-1 pr-2 pl-2 rounded-lg text-white outline-none" type="text" name="subject" placeholder="Onderwerp:">
-                            <h3 class='text-xl lg:text-sm ml-3 mt-3 font-bold pl-2'>OMSCHRIJVING</h3>
-                            <textarea class="text-xl lg:text-lg ml-3 font-bold bg-neutral-800 mt-2 pr-10 py-1 pl-2 rounded-lg placeholder:text-neutral-400 text-white outline-none" rows="8" cols="60" name="content" id="content" placeholder="Vul hier de omschrijving van je vraag in"></textarea>
-                            <h3 class='text-xl lg:text-sm ml-3 mt-3 font-bold pl-2'>CODE</h3>
-                            <textarea class="text-xl lg:text-lg ml-3 font-bold bg-neutral-800 mt-2 pr-10 py-1 pl-2 rounded-lg placeholder:text-neutral-400 text-white outline-none" rows="4" cols="60" name="code" id="code" placeholder="Hier kan je jou code toevoegen"></textarea>
-                            <div class="w-[710px] flex justify-center">
+                            <h3 class='text-xl lg:text-sm lg:ml-3 mt-3 font-bold pl-2'>ONDERWERP</h3>
+                            <input class="text-xl lg:text-lg lg:ml-3 font-bold bg-neutral-800 mt-2 py-1 pr-2 pl-2 rounded-lg text-white outline-none" type="text" name="subject" placeholder="Onderwerp:">
+                            <h3 class='text-xl lg:text-sm lg:ml-3 mt-3 font-bold pl-2'>OMSCHRIJVING</h3>
+                            <textarea class="text-xl lg:text-lg lg:ml-3 font-bold bg-neutral-800 mt-2 pr-10 py-1 pl-2 rounded-lg placeholder:text-neutral-400 text-white outline-none lg:w-[500px]" rows="8" name="content" id="content" placeholder="Vul hier de omschrijving van je vraag in"></textarea>
+                            <h3 class='text-xl lg:text-sm lg:ml-3 mt-3 font-bold pl-2'>CODE</h3>
+                            <textarea class="text-xl lg:text-lg lg:ml-3 font-bold bg-neutral-800 mt-2 pr-10 py-1 pl-2 rounded-lg placeholder:text-neutral-400 text-white outline-none lg:w-[500px]" rows="4" name="code" id="code" placeholder="Hier kan je jou code toevoegen"></textarea>
+                            <div class="lg:w-[710px] flex justify-center">
                                 <input class="bg-white text-black p-2 rounded-full text-xl px-8 mt-8 flex justify-center cursor-pointer bg-white hover:bg-gray-200 ease-in-out duration-300" style='font-family: Laro' type="submit" value="POST">
                             </div>
                         </form>
