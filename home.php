@@ -16,25 +16,25 @@ include "verbinding.php";
 </head>
 <body class='bg-neutral-800'>
     <div class='flex items-center p-3 w-full justify-between'>
-        <h2 class='font-bold uppercase text-white text-lg lg:text-xl' style='font-family: Laro'>BitOverflow</h2>
-        <button class='text-sm lg:text-lg text-white px-4 py-1 rounded-full flex items-center font-bold' style='background: #000563; font-family: Poppins'>Mijn profiel</button>
+        <a href="home.php"><h2 class='font-bold uppercase text-white text-lg lg:text-xl' style='font-family: Laro'>BitOverflow</h2></a>
+        <a href="profile.php"><button class='text-sm lg:text-lg text-white px-4 py-1 rounded-full flex items-center font-bold hover:bg-blue-700 ease-in-out duration-300 bg-blue-900' style='font-family: Poppins'>Mijn profiel</button></a>
     </div>
     <div class='flex'>
         <div class='hidden lg:block'>
-            <aside class='text-white font-bold' style='width: 175px;'>
+            <aside class='text-white font-bold' style='width: 175px; font-family: Laro'>
                 <div class='bg-neutral-700 pl-3 uppercase'>CATEGORIEËN</div>
-                <button class='pl-3 flex items-center my-2'><img src='icons/house.svg' class='pr-2'>Home</button>
+                <a href="home.php"><button class='pl-3 flex items-center my-2 cursor-pointer hover:text-gray-300 ease-in-out duration-300'><img src='icons/house.svg' class='pr-2'>Home</button></a>
                 <div class='bg-neutral-700 pl-3 uppercase'>Leerjaren</div>
-                <div class='border-b-2 border-neutral-700'><button class='py-2 pl-3 flex items-center mt-1'><img src='icons/leerjaar1.svg' class='pr-2'>1e jaar</button></div>
-                <div class='border-b-2 border-neutral-700'><button class='py-2 pl-3 flex items-center pt-2'><img src='icons/leerjaar2.svg' class='pr-2'>2e jaar</button></div>
-                <button class='pl-3 py-2 flex items-center'><img src='icons/leerjaar3.svg' class='pr-2'>3e jaar</button>
+                <div class='border-b-2 border-neutral-700'><button class='py-2 pl-3 flex items-center mt-1 hover:text-gray-300 ease-in-out duration-300'><img src='icons/leerjaar1.svg' class='pr-2'>1e jaar</button></div>
+                <div class='border-b-2 border-neutral-700'><button class='py-2 pl-3 flex items-center pt-2 hover:text-gray-300 ease-in-out duration-300'><img src='icons/leerjaar2.svg' class='pr-2'>2e jaar</button></div>
+                <button class='pl-3 py-2 flex items-center hover:text-gray-300 ease-in-out duration-300'><img src='icons/leerjaar3.svg' class='pr-2'>3e jaar</button>
                 <div class='bg-neutral-700 pl-3 uppercase'>Talen</div>
-                <div class='border-b-2 border-neutral-700'><button class='py-2 pl-3 flex items-center mt-1'><img src='icons/leerjaar1.svg' class='pr-2'>PHP</button></div>
-                <div class='border-b-2 border-neutral-700'><button class='py-2 pl-3 flex items-center pt-2'><img src='icons/leerjaar2.svg' class='pr-2'>JAVASCRIPT</button></div>
-                <div class='border-b-2 border-neutral-700'><button class='py-2 pl-3 flex items-center mt-1'><img src='icons/leerjaar1.svg' class='pr-2'>PYTHON</button></div>
-                <div class='border-b-2 border-neutral-700'><button class='py-2 pl-3 flex items-center pt-2'><img src='icons/leerjaar2.svg' class='pr-2'>LARAVEL</button></div>
-                <div class='border-b-2 border-neutral-700'><button class='py-2 pl-3 flex items-center mt-1'><img src='icons/leerjaar1.svg' class='pr-2'>HTML</button></div>
-                <button class='py-2 pl-3 flex items-center pt-2'><img src='icons/leerjaar2.svg' class='pr-2'>CSS</button>
+                <div class='border-b-2 border-neutral-700'><button class='py-2 pl-3 flex items-center mt-1 hover:text-gray-300 ease-in-out duration-300'><img src='icons/leerjaar1.svg' class='pr-2'>PHP</button></div>
+                <div class='border-b-2 border-neutral-700'><button class='py-2 pl-3 flex items-center pt-2 hover:text-gray-300 ease-in-out duration-300'><img src='icons/leerjaar2.svg' class='pr-2'>JAVASCRIPT</button></div>
+                <div class='border-b-2 border-neutral-700'><button class='py-2 pl-3 flex items-center mt-1 hover:text-gray-300 ease-in-out duration-300'><img src='icons/leerjaar1.svg' class='pr-2'>PYTHON</button></div>
+                <div class='border-b-2 border-neutral-700'><button class='py-2 pl-3 flex items-center pt-2 hover:text-gray-300 ease-in-out duration-300'><img src='icons/leerjaar2.svg' class='pr-2'>LARAVEL</button></div>
+                <div class='border-b-2 border-neutral-700'><button class='py-2 pl-3 flex items-center mt-1 hover:text-gray-300 ease-in-out duration-300'><img src='icons/leerjaar1.svg' class='pr-2'>HTML</button></div>
+                <button class='py-2 pl-3 flex items-center pt-2 hover:text-gray-300 ease-in-out duration-300'><img src='icons/leerjaar2.svg' class='pr-2'>CSS</button>
             </aside>
         </div>
         <div class='px-4 lg:pl-16 pt-8 bg-neutral-900 pb-12 md:pb-48 w-full' style='box-shadow: 0px 4px 40px 2px rgba(0, 0, 0, 0.25);'>
@@ -54,14 +54,14 @@ include "verbinding.php";
             </div>
             <div class='text-white px-1 lg:px-7 rounded-3xl lg:flex justify-between items-center w-full lg:w-[900px]'>
                 <h2 class='text-white font-bold text-xl lg:text-3xl my-10' style='font-family: Poppins'>Wie is er op zoek naar hulp?</h2>
-                <button class='text-sm lg:text-lg text-white px-5 py-1 rounded-full h-12 font-bold' style='background: #000563; font-family: Poppins'>Stel een vraag!</button>
+                <a href="posts/create.php"><button class='text-sm lg:text-lg text-white px-5 py-1 rounded-full h-12 font-bold hover:bg-blue-700 ease-in-out duration-300 bg-blue-900' style='font-family: Poppins'>Stel een vraag!</button></a>
             </div>
             <div class='mt-6 lg:mt-0 bg-neutral-700 text-white py-8 px-7 rounded-3xl flex lg:w-[900px]' style='box-shadow: 0px 4px 40px 2px rgba(0, 0, 0, 0.25);'>
                 <div class='mr-8 hidden lg:block'><img src='images/profile.png' class='w-24'></div>
                 <div>
                     <div class='pb-2 mb-2 border-b-2 bg-black-500' style='border-color: #606060;'>
                     <?php
-                    $query = "SELECT * FROM posts INNER JOIN users ON posts.user_id = users.id ORDER BY posts.id DESC LIMIT 0, 1";
+                    $query = "SELECT * FROM posts INNER JOIN users ON posts.user_id = users.id ORDER BY posts.id DESC LIMIT 0, 1;";
                     $sql = $pdo->prepare($query);
                     $sql->execute();
                     $rows = $sql->fetchAll();
@@ -69,7 +69,7 @@ include "verbinding.php";
                         ?>
                         <p class='text-zinc-500 font-bold text-xs' style='font-family: Laro'><?php echo $row['date'] ?></p>
                         <p class='text-white font-bold text-xl lg:text-2xl' style='font-family: Poppins'><?php echo $row['first_name']?> <?php echo $row['last_name'];?></p>
-                        <p class='text-zinc-500 font-bold text-xs uppercase' style='font-family: Laro'><?php echo $row['leerjaar']?>e jaars</p>
+                        <p class='text-zinc-500 font-bold text-xs uppercase' style='font-family: Laro'><?php echo $row['school_year']?>e jaars</p>
                     </div>
                     <span class='rounded-2xl bg-black px-6 py-1 font-bold text-center mr-2 text-xs' id='tag'>PHP</span>
                     <span class='rounded-2xl bg-black px-6 py-1 font-bold text-center text-xs' id='tag'>SESSIONS</span>
@@ -81,7 +81,7 @@ include "verbinding.php";
                     </p>
 <div class='bg-black text-white p-4 hidden lg:block rounded-2xl'>
     <code>
-        <?php echo $row['code'];?>
+        <?php echo htmlspecialchars($row['code']);?>
     </code></div>
     <form method='POST'>
 <div class='w-full flex justify-between items-center mt-12 text-3xl font-bold'>
@@ -102,7 +102,7 @@ include "verbinding.php";
         ?>
         	</span>
         </div><div class='flex'>
-        <span class='hidden lg:block'><button class='bg-gray-200 py-1 px-8 rounded-2xl text-black uppercase text-2xl' style='font-family: Laro'>Antwoord</button></span>
+        <span class='hidden lg:block'><button class='bg-gray-200 hover:bg-gray-100 ease-in-out duration-300 py-1 px-8 rounded-2xl text-black uppercase text-2xl' style='font-family: Laro'>Antwoord</button></span>
         <span class='w-10 h-10 flex items-center justify-center font-bold rounded-full ml-2 bg-white block lg:hidden'><img class='w-5' src='icons/chat.svg'></span>
     </div>
 </div>
@@ -112,13 +112,13 @@ include "verbinding.php";
         </div>
     </div>
     <div class='flex items-center py-8 lg:pl-8 px-6 lg:px-0 lg:pr-24 w-full justify-between w-full' style='font-family: Laro'>
-            <h2 class='font-bold uppercase text-white text-lg lg:ml-48'>BitOverflow</h2>
+            <h2 class='font-bold uppercase text-white text-lg lg:ml-48 cursor-pointer hover:text-gray-300 ease-in-out duration-300'>BitOverflow</h2>
             <div>
                 <ul class='text-x lg:text-lg'>
-                    <li class='font-bold uppercase text-white'>Guidelines</li>
-                    <li class='font-bold uppercase text-white'>Privacy</li>
-                    <li class='font-bold uppercase text-white'>Disclaimer</li>
-                    <li class='font-bold uppercase text-white'>Bit-Academy</li>
+                    <li class='font-bold uppercase text-white cursor-pointer hover:text-gray-300 ease-in-out duration-300'>Guidelines</li>
+                    <li class='font-bold uppercase text-white cursor-pointer hover:text-gray-300 ease-in-out duration-300'>Privacy</li>
+                    <li class='font-bold uppercase text-white cursor-pointer hover:text-gray-300 ease-in-out duration-300'>Disclaimer</li>
+                    <li class='font-bold uppercase text-white cursor-pointer hover:text-gray-300 ease-in-out duration-300'>Bit-Academy</li>
                 </ul>
             </div>
 </body>
