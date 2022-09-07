@@ -90,18 +90,19 @@ $stmt->execute();
 
 $totalPosts = $stmt->rowCount();
 
-$sql = 'SELECT posts.*, CONCAT_WS(" ", users.first_name, users.last_name) AS username, categories.name as category FROM posts
-        INNER JOIN users ON posts.user_id = users.id 
-        INNER JOIN categories ON posts.category_id = categories.id
-        WHERE user_id = :id 
-        ORDER BY `date` DESC LIMIT 1';
+if ($totalPosts > 0) {
+    $sql = 'SELECT posts.*, CONCAT_WS(" ", users.first_name, users.last_name) AS username, categories.name as category FROM posts
+            INNER JOIN users ON posts.user_id = users.id 
+            INNER JOIN categories ON posts.category_id = categories.id
+            WHERE user_id = :id 
+            ORDER BY `date` DESC LIMIT 1';
 
-$stmt = $pdo->prepare($sql);
-$stmt->bindParam(':id', $_SESSION['user']['id']);
-$stmt->execute();
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':id', $_SESSION['user']['id']);
+    $stmt->execute();
 
-$lastPost = $stmt->fetch(PDO::FETCH_ASSOC);
-
+    $lastPost = $stmt->fetch(PDO::FETCH_ASSOC);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -164,7 +165,7 @@ $lastPost = $stmt->fetch(PDO::FETCH_ASSOC);
     <div>
         <h2>Jou meest recente post</h2>
         <?php 
-            if ($lastPost) { ?>
+            if (isset($lastPost)) { ?>
                 <p><b>Geplaatst op:</b> <?php echo $lastPost['date']; ?></p>
                 <p><b>Geplaatst door:</b> <?php echo $lastPost['username']; ?></p>
                 <p><b>Categorie:</b> <?php echo $lastPost['category']; ?></p>
