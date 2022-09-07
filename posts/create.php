@@ -119,7 +119,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </form>
                     </div>
                     <div class='bg-neutral-700 text-white py-8 px-7 rounded-3xl lg:w-[345px] lg:h-[805px] top-40 absolute right-0 mr-6 hidden lg:block' style='font-family: Poppins; box-shadow: 0px 4px 40px 2px rgba(0, 0, 0, 0.25);'>
-                        <h3 class='text-xl flex justify-center lg:text-3xl ml-3 mt-3 font-bold pl-2' style='font-family: Poppins;'>Top 3 Topics:</h3>
+                        <h3 class='text-xl flex justify-center lg:text-3xl ml-3 mt-3 font-bold pl-2' style='font-family: Poppins;'>Trending Topics:</h3>
                         <h3 class='text-xl flex justify-center lg:text-xs ml-3 mt-2 font-bold pl-2 text-neutral-500' style='font-family: Laro;'>IN DE AFGELOPEN 24 UUR</h3>
                         <div class='flex justify-center items-center'><span class='bg-green-500 w-16 h-16 p-2 mt-12 flex items-center justify-center font-bold text-4xl rounded-full'>1</span></div>
                         <h3 class='text-xl flex justify-center lg:text-3xl ml-3 mt-3 font-bold pl-2' style='font-family: Poppins;'>Laravel</h3>
