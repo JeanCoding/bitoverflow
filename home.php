@@ -11,15 +11,13 @@ include "verbinding.php";
 <html>
 <head>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
-    <script>hljs.highlightAll();</script>
     <title>BitOverflow | Home</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 <body class='bg-neutral-800'>
     <div class='flex items-center p-3 w-full justify-between'>
         <h2 class='font-bold uppercase text-white text-lg lg:text-xl' style='font-family: Laro'>BitOverflow</h2>
-        <button class='text-sm lg:text-lg text-white px-5 py-2 rounded-full flex items-center font-bold' style='background: #000563; font-family: Poppins'>Mijn profiel</button>
+        <button class='text-sm lg:text-lg text-white px-4 py-1 rounded-full flex items-center font-bold' style='background: #000563; font-family: Poppins'>Mijn profiel</button>
     </div>
     <div class='flex'>
         <div class='hidden lg:block'>
@@ -50,69 +48,65 @@ include "verbinding.php";
                         <div class='flex items-center'><span class='bg-orange-600 w-10 h-10 p-2 flex items-center justify-center font-bold text-2xl rounded-full'>3</span><h3 class='text-xl lg:text-2xl ml-3 font-bold'>Python</h3></div>
                     </div>
                     <div>
-                    <img src='images/grafiek.png' class='rounded-3xl w-2/3 float-right hidden lg:block'>
+                    <img src='images/grafiek.png' class='rounded-3xl h-[175px] w-[325px] float-right hidden lg:block'>
                     </div>
                 </div>
             </div>
             <div class='text-white px-1 lg:px-7 rounded-3xl lg:flex justify-between items-center w-full lg:w-[900px]'>
-                <h2 class='text-white font-bold text-xl lg:text-3xl my-7' style='font-family: Poppins'>Wie is er op zoek naar hulp?</h2>
+                <h2 class='text-white font-bold text-xl lg:text-3xl my-10' style='font-family: Poppins'>Wie is er op zoek naar hulp?</h2>
                 <button class='text-sm lg:text-lg text-white px-5 py-1 rounded-full h-12 font-bold' style='background: #000563; font-family: Poppins'>Stel een vraag!</button>
             </div>
             <div class='mt-6 lg:mt-0 bg-neutral-700 text-white py-8 px-7 rounded-3xl flex lg:w-[900px]' style='box-shadow: 0px 4px 40px 2px rgba(0, 0, 0, 0.25);'>
-                <div class='w-1/2 hidden lg:block'><img src='images/profile.png'></div>
+                <div class='mr-8 hidden lg:block'><img src='images/profile.png' class='w-24'></div>
                 <div>
                     <div class='pb-2 mb-2 border-b-2 bg-black-500' style='border-color: #606060;'>
-                        <p class='text-zinc-500 font-bold text-xs' style='font-family: Laro'>16-08-2022 16:42</p>
-                        <p class='text-white font-bold text-xl lg:text-2xl' style='font-family: Poppins'>Dave Havelaar</p>
-                        <p class='text-zinc-500 font-bold text-xs uppercase' style='font-family: Laro'>3e jaars</p>
+                    <?php
+                    $query = "SELECT * FROM posts INNER JOIN users ON posts.user_id = users.id WHERE users.id=(SELECT max(id) FROM posts);
+                    ";
+                    $sql = $pdo->prepare($query);
+                    $sql->execute();
+                    $rows = $sql->fetchAll();
+                    foreach ($rows as $row) {
+                        ?>
+                        <p class='text-zinc-500 font-bold text-xs' style='font-family: Laro'><?php echo $row['date'] ?></p>
+                        <p class='text-white font-bold text-xl lg:text-2xl' style='font-family: Poppins'><?php echo $row['first_name']?> <?php echo $row['last_name'];?></p>
+                        <p class='text-zinc-500 font-bold text-xs uppercase' style='font-family: Laro'><?php echo $row['leerjaar']?>e jaars</p>
                     </div>
                     <span class='rounded-2xl bg-black px-6 py-1 font-bold text-center mr-2 text-xs' id='tag'>PHP</span>
                     <span class='rounded-2xl bg-black px-6 py-1 font-bold text-center text-xs' id='tag'>SESSIONS</span>
                     <p class='text-zinc-500 font-bold text-xs mt-6 uppercase' style='font-family: Laro'>Onderwerp:</p>
-                    <p class='text-white font-bold lg:text-xl break-all' style='font-family: Poppins'>Hoe laat ik een PHP Sessie stoppen na 30 minuten?</p>
+                    <p class='text-white font-bold lg:text-xl break-all' style='font-family: Poppins'><?php echo $row['subject']; ?></p>
                     <p class='text-zinc-500 font-bold text-xs mt-6 uppercase' style='font-family: Laro'>Beschrijving:</p>
                     <p class='text-white font-bold text-lg mb-8' style='font-family: Poppins'>
-                            Mijn PHP sessie moet gestopt worden na 30 minuten. Ik heb al meerdere dingen geprobeerd maar hij blijft maar doorgaan. Dit is wat ik al geprobeerd heb:
+                    <?php echo $row['content'];?>
                     </p>
-<div class='bg-black text-white p-4 hidden lg:block rounded-2xl'><code>
-useEffect(() =&gt; {
-    const allItems = body?.map((item, index) =&gt; {
-      switch (item?.__typename) {
-        case &#39;ArticleBodyText&#39;:
-          return (
-            &lt;ArticleBodyText
-              key={index}
-              dynamic_words={dynamic_words}
-              text={item.primary.body_text}
-            /&gt;
-          );
-        case &#39;ArticleBodyImage&#39;:
-          return &lt;ArticleBodyImage key={index} item={item} /&gt;;
-        case &#39;ArticleBodyEmbed&#39;:
-          return (
-            &lt;YoutubeEmbed
-              key={item?.primary?.embed?.thumbnail_url}
-              video={item?.primary?.embed?.html}
-            /&gt;
-          );
-        default:
-          break;
-      }
-      return allItems;
-    });
-
-    setItems(allItems);
-  }, [body, dynamic_words]);
-
-</code></div>
+<div class='bg-black text-white p-4 hidden lg:block rounded-2xl'>
+    <code>
+        <?php echo $row['code'];?>
+    </code></div>
+    <form method='POST'>
 <div class='w-full flex justify-between items-center mt-12 text-3xl font-bold'>
-    <div class='flex'>
-    <span class='w-10 h-10 lg:w-12 lg:h-12 p-2 flex items-center justify-center font-bold text-2xl rounded-full mr-6 ml-2' style='background: #5BFF61'><img src='icons/up_arrow.svg'></span>
-    <span class='w-10 h-10 lg:w-12 lg:h-12 p-2 flex items-center justify-center font-bold text-2xl rounded-full' style='background: #FF5959'><img src='icons/down_arrow.svg'></span>
-    <span class='px-4 py-1 flex items-center justify-center font-bold text-xl lg:text-2xl rounded-3xl ml-6' style='background: #5BFF61; font-family: Poppins'>+12</span>
+       <div class='flex'>
+        <button type='submit' name='upvote'><span class='w-10 h-10 lg:w-12 lg:h-12 p-2 flex items-center justify-center font-bold text-2xl rounded-full mr-6 ml-2' style='background: #5BFF61'><img src='icons/up_arrow.svg'></span></button>
+        <span class='w-10 h-10 lg:w-12 lg:h-12 p-2 flex items-center justify-center font-bold text-2xl rounded-full' style='background: #FF5959'><img src='icons/down_arrow.svg'></span>
+        <span class='px-4 py-1 flex items-center justify-center font-bold text-xl lg:text-2xl rounded-3xl ml-6' id='score' style=' font-family: Poppins'><span id='operator'></span>
+        <?php
+        $score = 6;
+        if ($score >= 0) {
+            echo "<script>document.getElementById('score').style.background = '#5BFF61'</script>";
+            echo "<script>document.getElementById('operator').innerText = '+'</script>";
+        } else {
+            echo "<script>document.getElementById('score').style.background = '#FF5959'</script>";
+        }
+            echo $score;
+        }
+        ?>
+        	</span>
+        </div><div class='flex'>
+        <span class='hidden lg:block'><button class='bg-gray-200 py-1 px-8 rounded-2xl text-black uppercase text-2xl' style='font-family: Laro'>Antwoord</button></span>
+        <span class='w-10 h-10 flex items-center justify-center font-bold rounded-full ml-2 bg-white block lg:hidden'><img class='w-5' src='icons/chat.svg'></span>
     </div>
-    <span class='hidden lg:block'><button class='bg-gray-200 py-1 px-8 rounded-2xl text-black uppercase text-2xl' style='font-family: Laro'>Antwoord</button></span>
-    <span class='w-10 h-10 flex items-center justify-center font-bold rounded-full ml-2 bg-white block lg:hidden'><img class='w-5' src='icons/chat.svg'></span>
+</div>
 </div>
                 </div>
             </div>
