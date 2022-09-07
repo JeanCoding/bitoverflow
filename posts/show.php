@@ -50,7 +50,7 @@ if (empty($post)) {
     <div>
         <h2>Reacties</h2>
         <div>
-            <form action="/posts/reply.php" method="post">
+            <form action="/posts/actions/reply.php" method="post">
                 <input type="hidden" name="post_id" value="<?php echo $postId ?>">
                 <textarea name="content" placeholder="Reactie plaatsen"></textarea>
                 <input type="submit" value="Reageer">
@@ -82,7 +82,7 @@ if (empty($post)) {
                 echo '<p><b>Geplaatst door:</b> ' . $comment['username'] . '</p>';
                 echo '<p><b>Geplaatst op:</b> ' . $comment['date'] . '</p>';
                 ?>
-                    <form action="/posts/vote.php" method="POST">
+                    <form action="/posts/actions/vote.php" method="POST">
                         <input type="hidden" name="comment_id" value="<?php echo $comment['id'] ?>">
                         <input type="hidden" name="post_id" value="<?php echo $postId ?>">
                         <input type="hidden" name="comment_user_id" value="<?php echo $comment['commentUserId'] ?>">
@@ -97,6 +97,21 @@ if (empty($post)) {
                     </form>
                 <?php
                 echo '</div>';
+                if ($post['user_id'] == $_SESSION['user']['id']) { ?>
+                    <form action="/posts/actions/mark.php" method="POST">
+                        <input type="hidden" name="comment_id" value="<?php echo $comment['id'] ?>">
+                        <input type="hidden" name="comment_user_id" value="<?php echo $comment['commentUserId'] ?>">
+                        <input type="hidden" name="post_id" value="<?php echo $postId ?>">
+                        <input type="hidden" name="user_id" value="<?php echo $_SESSION['user']['id'] ?>">
+                        <input type="submit" name="mark" value="<?php echo $comment['solution'] == 1 ? 'Markering ongedaan maken' : 'Markeren als oplossing' ?>"
+                            <?php if ($comment['user_id'] == $_SESSION['user']['id']) echo 'disabled'; ?>
+                        >
+                    </form>
+                <?php }
+                if ($comment['solution'] == 1) {
+                    echo '<p style="color: green;">Gemarkeerd als oplossing.</p>';
+                }
+                echo '<hr>';
             }
         ?>
     </div>

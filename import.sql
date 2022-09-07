@@ -7,6 +7,7 @@ CREATE TABLE users (
     username varchar(255) NOT NULL,
     email varchar(255) NOT NULL,
     password varchar(255) NOT NULL,
+    reputation int(11) NOT NULL DEFAULT 0,
     PRIMARY KEY (id)
 );
 
@@ -34,6 +35,7 @@ CREATE TABLE comments (
     post_id int(11) NOT NULL,
     user_id int(11) NOT NULL,
     `date` datetime DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    solution boolean NOT NULL DEFAULT 0,
     PRIMARY KEY (id),
     FOREIGN KEY (post_id) REFERENCES posts(id),
     FOREIGN KEY (user_id) REFERENCES users(id)
