@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $errors['username'] = 'Naam is verplicht';
     } elseif (str_word_count($_POST['username']) < 2) {
         $errors['username'] = 'Naam moet minimaal 2 woorden bevatten';
-    } elseif(!str_word_count($_POST['username']) > 2){
+    } elseif(str_word_count($_POST['username']) > 2){
         $errors['username'] = 'Naam mag maximaal 2 woorden bevatten';
     }else {
         $username = $_POST['username'];
