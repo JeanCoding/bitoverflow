@@ -104,11 +104,13 @@ $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </div>
     <?php foreach($posts as $post): ?>
         <a href="/posts/show.php/<?php echo $post['id']; ?>" style="text-decoration: inherit; color: inherit;">
-            <h1><?php echo $post['subject']; ?></h1>
-            <p><?php echo $post['content']; ?></p>
-            <p><?php echo $post['category']; ?></p>
-            <p><?php echo $post['username']; ?> (<?php echo $post['school_year'] ?>e jaars)</p>
-            <p><?php echo $post['date']; ?></p>
+            <h1><?php echo $post['subject'] ?></h1>
+            <p><b>Omschrijving:</b></p>
+            <p><?php echo $post['content'] ?></p>
+            <p><b>Geplaatst door:</b> <?php echo $post['username'] ?> (<?php echo $post['school_year'] ?>e jaars)</p>
+            <p><b>Categorie:</b> <?php echo $post['category'] ?></p>
+            <p><b>Geplaatst op:</b> <?php echo $post['date'] ?></p>
+            <hr>
         </a>
     <?php endforeach; ?>
 </body>
