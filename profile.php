@@ -100,11 +100,16 @@ $lastPost = $stmt->fetch(PDO::FETCH_ASSOC);
     </div>
     <div>
         <h2>Jou meest recente post</h2>
-        <p><b>Geplaatst op:</b> <?php echo $lastPost['date']; ?></p>
-        <p><b>Geplaatst door:</b> <?php echo $lastPost['username']; ?></p>
-        <p><b>Categorie:</b> <?php echo $lastPost['category']; ?></p>
-        <p><b>Onderwerp:</b> <?php echo $lastPost['subject']; ?></p>
-        <p><b>Omschrijving:</b> <?php echo $lastPost['content']; ?></p>
+        <?php 
+            if ($lastPost) { ?>
+                <p><b>Geplaatst op:</b> <?php echo $lastPost['date']; ?></p>
+                <p><b>Geplaatst door:</b> <?php echo $lastPost['username']; ?></p>
+                <p><b>Categorie:</b> <?php echo $lastPost['category']; ?></p>
+                <p><b>Onderwerp:</b> <?php echo $lastPost['subject']; ?></p>
+                <p><b>Omschrijving:</b> <?php echo $lastPost['content']; ?></p>   
+            <?php } else { ?>
+                <p>Je hebt nog geen posts geplaatst.</p>
+            <?php } ?>
     </div>
 </body>
 </html>
