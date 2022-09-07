@@ -7,6 +7,57 @@ if (!isset($_SESSION['user'])) {
 
 include './verbinding.php';
 
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (empty($_POST['username'])) {
+        $errors['username'] = 'Naam is verplicht';
+    } elseif (str_word_count($_POST['username']) < 2) {
+        $errors['username'] = 'Naam moet minimaal 2 woorden bevatten';
+    } elseif(!str_word_count($_POST['username']) > 2){
+        $errors['username'] = 'Naam mag maximaal 2 woorden bevatten';
+    }else {
+        $username = $_POST['username'];
+    }
+
+    if (empty($_POST['email'])) {
+        $errors['email'] = 'Email is verplicht';
+    } elseif (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+        $errors['email'] = 'Email is ongeldig';
+    } else {
+        $email = $_POST['email'];
+    }
+
+    if (empty($_POST['school_year'])) {
+        $errors['school_year'] = 'Schooljaar is verplicht';
+    } elseif (!preg_match('/^[0-4]/', $_POST['school_year'])) {
+        $errors['school_year'] = 'Schooljaar is ongeldig';
+    } else {
+        $school_year = substr($_POST['school_year'], 0, 1);
+    }
+    
+    if (empty($_POST['password'])) {
+        $errors['password'] = 'Wachtwoord is verplicht';
+    } elseif (strlen($_POST['password']) < 8) {
+        $errors['password'] = 'Wachtwoord moet minimaal 8 tekens bevatten';
+    } else {
+        $password = $_POST['password'];
+    }
+
+    if (empty($errors)) {
+        $sql = "UPDATE users SET first_name = :first_name, last_name = :last_name, email = :email, school_year = :school_year, `password` = :password WHERE id = :id";
+        $stmt = $pdo->prepare($sql);
+        $fullName = explode(' ', $username);
+        $stmt->execute([
+            ':first_name' => $fullName[0],
+            ':last_name' => $fullName[1],
+            ':email' => $email,
+            ':school_year' => $school_year,
+            ':password' => $password,
+            ':id' => $_SESSION['user']['id']
+        ]);
+        $_SESSION['user']['name'] = $username;
+    }
+}
+
 $sql = 'SELECT * FROM users WHERE id = :id';
 $stmt = $pdo->prepare($sql);
 $stmt->bindParam(':id', $_SESSION['user']['id']);
@@ -74,6 +125,14 @@ $lastPost = $stmt->fetch(PDO::FETCH_ASSOC);
             <label for="biography">BIOGRAFIE</label>
             <textarea name="biography" id="biography" cols="30" rows="10" placeholder="Biografie"></textarea>
             <input type="submit" name="submit" value="CHANGE">
+
+            <?php if (!empty($errors)) : ?>
+                <ul>
+                    <?php foreach ($errors as $error) : ?>
+                        <li style="color: red;"><?php echo $error; ?></li>
+                    <?php endforeach; ?>
+                </ul>
+            <?php endif; ?>
         </form>
     </div>
     <div>
