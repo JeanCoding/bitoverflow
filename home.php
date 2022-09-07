@@ -61,8 +61,7 @@ include "verbinding.php";
                 <div>
                     <div class='pb-2 mb-2 border-b-2 bg-black-500' style='border-color: #606060;'>
                     <?php
-                    $query = "SELECT * FROM posts INNER JOIN users ON posts.user_id = users.id WHERE users.id=(SELECT max(id) FROM posts);
-                    ";
+                    $query = "SELECT * FROM posts INNER JOIN users ON posts.user_id = users.id ORDER BY posts.id DESC LIMIT 0, 1";
                     $sql = $pdo->prepare($query);
                     $sql->execute();
                     $rows = $sql->fetchAll();
