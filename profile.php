@@ -14,7 +14,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $errors['username'] = 'Naam moet minimaal 2 woorden bevatten';
     } elseif(str_word_count($_POST['username']) > 2){
         $errors['username'] = 'Naam mag maximaal 2 woorden bevatten';
-    }else {
+    } elseif (!preg_match('/^[a-zA-Z ]*$/', $_POST['username'])) {
+        $errors['username'] = 'Naam mag alleen letters bevatten';
+    } else {
         $username = $_POST['username'];
     }
 
@@ -46,6 +48,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $sql = "UPDATE users SET first_name = :first_name, last_name = :last_name, email = :email, school_year = :school_year, `password` = :password WHERE id = :id";
         $stmt = $pdo->prepare($sql);
         $fullName = explode(' ', $username);
+        $fullName[0] = ucfirst($fullName[0]);
+        $fullName[1] = ucfirst($fullName[1]);
         $stmt->execute([
             ':first_name' => $fullName[0],
             ':last_name' => $fullName[1],
@@ -54,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             ':password' => $password,
             ':id' => $_SESSION['user']['id']
         ]);
-        $_SESSION['user']['name'] = $username;
+        $_SESSION['user']['name'] = implode(' ', $fullName);
     }
 }
 
