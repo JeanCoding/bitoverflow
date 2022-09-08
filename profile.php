@@ -148,20 +148,20 @@ if ($totalPosts > 0) {
                         <label for="username" style='font-family: Laro' class='text-xs ml-2 mb-2'>NAAM</label>
                         <input style='background-color: #202020; font-family: Poppins' disabled type="text" name="username" id="username" placeholder="Naam" value="<?php echo $user['first_name'] . ' ' . $user['last_name']; ?>" class='rounded-3xl px-2.5 py-1.5 mb-4'>
                         <label for="email" class='ml-2 mb-2 text-xs'>E-MAIL</label>
-                        <input style='background-color: #202020; font-family: Poppins' type="email" name="email" id="email" placeholder="E-mail" value="<?php echo $user['email']; ?>" class='rounded-3xl px-2.5 py-1.5 mb-4'>
+                        <input style='background-color: #202020; font-family: Poppins' type="email" name="email" id="email" placeholder="E-mail" value="<?php echo $user['email']; ?>" class='rounded-3xl px-2.5 py-1.5 mb-4 outline-none'>
                         <label for="email" class='ml-2 mb-2 text-xs'>LEERJAAR</label>
-                        <select style='background-color: #202020; font-family: Poppins' name='school_year' class='px-2 mb-4 py-1.5 rounded-3xl'>
+                        <select style='background-color: #202020; font-family: Poppins' name='school_year' class='px-2 mb-4 py-1.5 rounded-3xl  outline-none'>
                             <option value='<?php $user['schoolyear']?>' selected disabled hidden>Leerjaar <?php echo $user['school_year'] ?></option>
                             <option value='1' id='option1'>Leerjaar 1</option>
                             <option value='2' id='option2'>Leerjaar 2</option>
                             <option value='3' id='option3'>Leerjaar 3</option>
                         </select>
                         <label for="password" class='ml-2 mb-2 text-xs'>WACHTWOORD</label>
-                        <input style='background-color: #202020; font-family: Poppins' type="password" name="password" id="password" placeholder="Wachtwoord" value="<?php echo $user['password']; ?>" class='rounded-3xl px-2.5 py-1.5 mb-4'>
+                        <input style='background-color: #202020; font-family: Poppins' type="password" name="password" id="password" placeholder="Wachtwoord" value="<?php echo $user['password']; ?>" class='rounded-3xl px-2.5 py-1.5 mb-4  outline-none'>
                         <label for="profile_picture_url" class='ml-2 mb-2 text-xs'>PROFIELFOTO URL</label>
-                        <input style='background-color: #202020; font-family: Poppins' type="text" name="img_url" id="profile_picture_url" value="<?php echo $user['img_url'] ?>" class='rounded-3xl px-2.5 py-1.5 mb-4'>
+                        <input style='background-color: #202020; font-family: Poppins' type="text" name="img_url" id="profile_picture_url" value="<?php echo $user['img_url'] ?>" class='rounded-3xl px-2.5 py-1.5 mb-4  outline-none'>
                         <label for="biography" class='ml-2 mb-2 text-xs'>BIOGRAFIE</label>
-                        <textarea style='background-color: #202020; font-family: Poppins' name="description" id="biography" cols="30" rows="10" class='lg:w-[600px] lg:h-[130px] rounded-2xl px-2.5 py-1.5 mb-4'><?php echo $user['description']?></textarea>
+                        <textarea style='background-color: #202020; font-family: Poppins' name="description" id="biography" cols="30" rows="10" class='lg:w-[600px] lg:h-[130px] rounded-2xl px-2.5 py-1.5 mb-4  outline-none'><?php echo $user['description']?></textarea>
                         <div class='lg:w-[600px] flex flex-col lg:flex-row items-center justify-between py-4 mt-2' style='font-family: Laro'>
                             <input type="submit" name="submit" value="CHANGE" class='bg-white rounded-3xl text-black text-xl py-2 px-12 cursor-pointer mb-5 lg:mb-0'>
                             <a href='logout.php'><button type='button' class='bg-red-600 rounded-3xl text-white text-xl py-2 px-12 cursor-pointer uppercase'>Uitloggen</button></a>
@@ -191,7 +191,7 @@ if ($totalPosts > 0) {
 
                 <div class='mt-6 lg:mt-0 bg-neutral-700 text-white py-8 px-7 mb-20 rounded-3xl flex w-full' style='box-shadow: 0px 4px 40px 2px rgba(0, 0, 0, 0.25);'>
                             <?php
-                            $query = "SELECT * FROM posts INNER JOIN users ON posts.user_id = users.id WHERE users.id = :id ORDER BY posts.id DESC LIMIT 0, 1;";
+                            $query = "SELECT * FROM posts INNER JOIN users ON posts.user_id = users.id INNER JOIN categories ON posts.category_id = categories.id WHERE users.id = :id ORDER BY posts.id DESC LIMIT 0, 1;";
                             $sql = $pdo->prepare($query);
                             $sql->bindParam(':id', $_SESSION['user']['id']);
                             $sql->execute();
@@ -205,8 +205,7 @@ if ($totalPosts > 0) {
                                 <p class='text-white font-bold text-xl lg:text-2xl' style='font-family: Poppins'><?php echo $row['first_name'] ?> <?php echo $row['last_name']; ?></p>
                                 <p class='text-zinc-500 font-bold text-xs uppercase' style='font-family: Laro'><?php echo $row['school_year'] ?>e jaars</p>
                         </div>
-                        <span class='rounded-2xl bg-black px-6 py-1 font-bold text-center mr-2 text-xs' id='tag'>PHP</span>
-                        <span class='rounded-2xl bg-black px-6 py-1 font-bold text-center text-xs' id='tag'>SESSIONS</span>
+                        <span class='rounded-2xl bg-black px-6 py-1 font-bold text-center mr-2 text-xs' id='tag'><?php echo $row['name'] ?></span>
                         <p class='text-zinc-500 font-bold text-xs mt-6 uppercase' style='font-family: Laro'>Onderwerp:</p>
                         <p class='text-white font-bold lg:text-xl break-all' style='font-family: Poppins'><?php echo $row['subject']; ?></p>
                         <p class='text-zinc-500 font-bold text-xs mt-6 uppercase' style='font-family: Laro'>Beschrijving:</p>
@@ -323,4 +322,11 @@ if (isset($_POST['submit'])) {
     labels.forEach(label => (
         label.style.fontFamily = 'Laro'
     ));
+
+    const elements = document.querySelectorAll('#tag');
+    const colors = ['#00DE4C', '#FF5959', '#E96200', '#38BDF8', '#EAB308'];
+    for (let i = 0, l = elements.length; i < l; i++) {
+        const tagcolor = colors[Math.floor(Math.random() * colors.length)];
+        elements[i].style.color = tagcolor;
+    }
 </script>

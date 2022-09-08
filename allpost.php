@@ -45,7 +45,7 @@ include "verbinding.php";
             <h2 class='text-white  text-2xl lg:text-4xl mb-6 mt-6' style='font-family: Poppins'>Bekijk alle recente posts</h2>
             <div class="lg:grid grid-cols-2">
                                 <?php
-                                $query = "SELECT * FROM posts INNER JOIN users ON posts.user_id = users.id ORDER BY posts.id DESC";
+                                $query = "SELECT * FROM posts INNER JOIN users ON posts.user_id = users.id INNER JOIN categories ON posts.category_id = categories.id ORDER BY posts.id DESC";
                                 $sql = $pdo->prepare($query);
                                 $sql->execute();
                                 $rows = $sql->fetchAll();
@@ -54,13 +54,12 @@ include "verbinding.php";
                     <div class='my-6 lg:mt-0 bg-neutral-700 text-white py-8 px-7 rounded-3xl flex lg:w-[600px]' style='box-shadow: 0px 4px 40px 2px rgba(0, 0, 0, 0.25);'>
                         <div class='mr-4 mt-3 hidden lg:block'><img src='<?php echo $row['img_url'] ?>' class='rounded-full w-56'></div>
                         <div>
-                            <div class='pb-2 mb-2 border-b-2 bg-black-500' style='border-color: #606060;'>
+                            <div class='pb-2 mb-2 border-b-2 bg-black-500 mb-4' style='border-color: #606060;'>
                                     <p class='text-zinc-500 font-bold text-xs' style='font-family: Laro'><?php echo $row['date'] ?></p>
                                     <p class='text-white font-bold text-xl lg:text-2xl' style='font-family: Poppins'><?php echo $row['first_name'] ?> <?php echo $row['last_name']; ?></p>
                                     <p class='text-zinc-500 font-bold text-xs uppercase' style='font-family: Laro'><?php echo $row['school_year'] ?>e jaars</p>
                             </div>
-                            <span class='rounded-2xl bg-black px-6 py-1 font-bold text-center mr-2 text-xs' id='tag'>PHP</span>
-                            <span class='rounded-2xl bg-black px-6 py-1 font-bold text-center text-xs' id='tag'>SESSIONS</span>
+                            <span style='font-family: Laro' class='rounded-2xl bg-black px-6 py-1 font-bold text-center mr-2 text-xs' id='tag'><?php echo $row['name'] ?></span>
                             <p class='text-zinc-500 font-bold text-xs mt-6 uppercase' style='font-family: Laro'>Onderwerp:</p>
                             <p class='text-white font-bold lg:text-xl break-all' style='font-family: Poppins'><?php echo $row['subject']; ?></p>
                             <p class='text-zinc-500 font-bold text-xs mt-6 uppercase' style='font-family: Laro'>Beschrijving:</p>

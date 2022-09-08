@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $stmt->execute();
 
-        header('Location: ./index.php');
+        header('Location: ../home.php');
     }
 }
 
@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class='hidden lg:block'>
         <aside class='text-white font-bold' style='width: 175px; font-family: Laro'>
                 <div class='bg-neutral-700 pl-3 uppercase'>CATEGORIEËN</div>
-                <a href="home.php"><button class='pl-3 flex items-center my-2 cursor-pointer hover:text-gray-300 ease-in-out duration-300'><img src='../icons/house.svg' class='pr-2'>Home</button></a>
+                <a href="../home.php"><button class='pl-3 flex items-center my-2 cursor-pointer hover:text-gray-300 ease-in-out duration-300'><img src='../icons/house.svg' class='pr-2'>Home</button></a>
                 <div class='bg-neutral-700 pl-3 uppercase'>Leerjaren</div>
                 <div class='border-b-2 border-neutral-700'><button class='py-2 pl-3 flex items-center mt-1 hover:text-gray-300 ease-in-out duration-300'><img src='../icons/leerjaar1.svg' class='pr-2'>1e jaar</button></div>
                 <div class='border-b-2 border-neutral-700'><button class='py-2 pl-3 flex items-center pt-2 hover:text-gray-300 ease-in-out duration-300'><img src='../icons/leerjaar2.svg' class='pr-2'>2e jaar</button></div>
