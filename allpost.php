@@ -51,8 +51,8 @@ include "verbinding.php";
                                 $rows = $sql->fetchAll();
                                 foreach ($rows as $row) {
                                 ?>
-                    <div class='mt-6 lg:mt-0 bg-neutral-700 text-white py-8 px-7 rounded-3xl flex lg:w-[600px]' style='box-shadow: 0px 4px 40px 2px rgba(0, 0, 0, 0.25);'>
-                        <div class='mr-4 mt-3 hidden lg:block'><img src='images/profile.png' class='w-64'></div>
+                    <div class='my-6 lg:mt-0 bg-neutral-700 text-white py-8 px-7 rounded-3xl flex lg:w-[600px]' style='box-shadow: 0px 4px 40px 2px rgba(0, 0, 0, 0.25);'>
+                        <div class='mr-4 mt-3 hidden lg:block'><img src='<?php echo $row['img_url'] ?>' class='rounded-full w-56'></div>
                         <div>
                             <div class='pb-2 mb-2 border-b-2 bg-black-500' style='border-color: #606060;'>
                                     <p class='text-zinc-500 font-bold text-xs' style='font-family: Laro'><?php echo $row['date'] ?></p>

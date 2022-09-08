@@ -85,16 +85,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </aside>
         </div>
         <div class='px-4 lg:pl-10 pt-8 bg-neutral-900 pb-12 md:pb-48 w-full' style='box-shadow: 0px 4px 40px 2px rgba(0, 0, 0, 0.25);'>
-            <h2 class='text-white  text-2xl lg:text-4xl mb-6' style='font-family: Poppins'>Stel hier een vraag Jean!</h2>
+                        <?php
+                                $query = "SELECT * FROM users WHERE id = :id";
+                                $sql = $pdo->prepare($query);
+                                $sql->bindParam('id', $_SESSION['user']['id']);
+                                $sql->execute();
+                                $rows = $sql->fetchAll();
+                                foreach ($rows as $row) {
+                                ?>
+            <h2 class='text-white  text-2xl lg:text-4xl mb-6' style='font-family: Poppins'>Stel hier een vraag <?php echo $row['first_name']; ?>!</h2>
             <div class='bg-neutral-700 text-white py-6 lg:py-8 px-7 rounded-3xl xl:w-[850px] 2xl:w-[900px]' style='font-family: Poppins'>
                 <div class='mt-2 flex'>
                     <div>
-                        <div class='flex items-center'><span class='flex items-center justify-center mt-4 font-bold text-2xl rounded-full'><img src='../images/profile.png' class='pr-2'></span></div>
-                    </div>
+                        <div class='flex items-center'><span class='flex items-center justify-center mt-4 font-bold text-2xl rounded-full'>
+                        <img src='../images/profile.png' class='pr-2'></span></div>
+                        </div>
                     <div>
                         <form class='lg:w-[250px]' method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                             <h3 class='text-xl lg:text-sm lg:ml-3 font-bold pl-2'>NAAM</h3>
-                            <input class='text-xl lg:text-lg lg:ml-3 font-bold bg-neutral-800 pr-2 mt-2 py-1 pl-2 rounded-lg text-neutral-400' disabled placeholder="Jean Kalo"></input>
+                            <input class='text-xl lg:text-lg lg:ml-3 font-bold bg-neutral-800 pr-2 mt-2 py-1 pl-2 rounded-lg text-neutral-400' disabled placeholder="<?php echo $row['first_name']; ?> <?php echo $row['last_name']; }?>"></input>
                             <h3 class='text-xl lg:text-sm lg:ml-3 mt-3 font-bold pl-2'>TAG</h3>
                             <select class="text-xl lg:text-lg lg:ml-3 font-bold bg-neutral-800 mt-2 py-1 pl-2 rounded-lg text-neutral-400 pr-32" name="category" id="category" required>
                                 <?php
