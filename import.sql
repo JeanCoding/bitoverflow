@@ -11,6 +11,7 @@ CREATE TABLE users (
     email varchar(255) NOT NULL,
     password varchar(255) NOT NULL,
     reputation int(11) NOT NULL DEFAULT 0,
+    description text,
     PRIMARY KEY (id)
 );
 
@@ -47,14 +48,12 @@ CREATE TABLE comments (
 
 CREATE TABLE votes (
     id int(11) AUTO_INCREMENT,
-    vote boolean NOT NULL,
-    comment_id int(11) NOT NULL,
+    score int(11) NOT NULL,
+    post_id int(11) NOT NULL,
     user_id int(11) NOT NULL,
-    comment_user_id int(11) NOT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (comment_id) REFERENCES comments(id),
     FOREIGN KEY (user_id) REFERENCES users(id),
-    FOREIGN KEY (comment_user_id) REFERENCES users(id)
+    FOREIGN KEY (post_id) REFERENCES posts(id)
 );
 
 CREATE TABLE scores (
