@@ -51,6 +51,7 @@ CREATE TABLE votes (
     score int(11) NOT NULL,
     post_id int(11) NOT NULL,
     user_id int(11) NOT NULL,
+    post_user_id int(11) NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (user_id) REFERENCES users(id),
     FOREIGN KEY (post_id) REFERENCES posts(id)
@@ -64,5 +65,5 @@ CREATE TABLE scores (
     FOREIGN KEY (post_id) REFERENCES posts(id)
 );
 
-INSERT INTO users (first_name, last_name, school_year, email, password) VALUES ('Admin', 'Bitoverflow', 2, 'admin@bitoverflow.nl', 'admin');
+INSERT INTO users (first_name, last_name, img_url, school_year, email, password) VALUES ('Admin', 'Bitoverflow', '', 2, 'admin@bitoverflow.nl', 'admin');
 INSERT INTO categories (name) VALUES ('PHP'), ('MySQL'), ('HTML'), ('CSS'), ('JavaScript');
