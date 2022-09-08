@@ -7,59 +7,22 @@ if (!isset($_SESSION['user'])) {
 
 include './verbinding.php';
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // if (empty($_POST['username'])) {
-    //     $errors['username'] = 'Naam is verplicht';
-    // } elseif (str_word_count($_POST['username']) < 2) {
-    //     $errors['username'] = 'Naam moet minimaal 2 woorden bevatten';
-    // } elseif (str_word_count($_POST['username']) > 2) {
-    //     $errors['username'] = 'Naam mag maximaal 2 woorden bevatten';
-    // } elseif (!preg_match('/^[a-zA-Z ]*$/', $_POST['username'])) {
-    //     $errors['username'] = 'Naam mag alleen letters bevatten';
-    // } else {
-    //     $username = $_POST['username'];
-    // }
+if (isset($_POST['submit'])) {    
+    $email = $_POST['email'];
+    $school_year = $_POST['school_year'];
+    $password = $_POST['password'];
+    $img_url = $_POST['img_url'];
+    $description = $_POST['description'];
 
-    if (empty($_POST['email'])) {
-        $errors['email'] = 'Email is verplicht';
-    } elseif (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-        $errors['email'] = 'Email is ongeldig';
-    } else {
-        $email = $_POST['email'];
-    }
-
-    if (empty($_POST['school_year'])) {
-        $errors['school_year'] = 'Schooljaar is verplicht';
-    } elseif (!preg_match('/^[1-3]/', $_POST['school_year'])) {
-        $errors['school_year'] = 'Schooljaar is ongeldig';
-    } else {
-        $school_year = substr($_POST['school_year'], 0, 1);
-    }
-
-    if (empty($_POST['password'])) {
-        $errors['password'] = 'Wachtwoord is verplicht';
-    } elseif (strlen($_POST['password']) < 8) {
-        $errors['password'] = 'Wachtwoord moet minimaal 8 tekens bevatten';
-    } else {
-        $password = $_POST['password'];
-    }
-
-    // if (empty($errors)) {
-    //     $sql = "UPDATE users SET first_name = :first_name, last_name = :last_name, email = :email, school_year = :school_year, `password` = :password WHERE id = :id";
-    //     $stmt = $pdo->prepare($sql);
-    //     $fullName = explode(' ', $username);
-    //     $fullName[0] = ucfirst($fullName[0]);
-    //     $fullName[1] = ucfirst($fullName[1]);
-    //     $stmt->execute([
-    //         ':first_name' => $fullName[0],
-    //         ':last_name' => $fullName[1],
-    //         ':email' => $email,
-    //         ':school_year' => $school_year,
-    //         ':password' => $password,
-    //         ':id' => $_SESSION['user']['id']
-    //     ]);
-    //     $_SESSION['user']['name'] = implode(' ', $fullName);
-    // }
+    $sql = 'UPDATE users SET email = :email, school_year = :school_year, password = :password, img_url = :img_url, description = :description WHERE id = :id';
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':email', $email);
+    $stmt->bindParam(':school_year', $school_year);
+    $stmt->bindParam(':password', $password);
+    $stmt->bindParam(':img_url', $img_url);
+    $stmt->bindParam(':description', $description);
+    $stmt->bindParam(':id', $_SESSION['user']['id']);
+    $stmt->execute();
 }
 
 $sql = 'SELECT * FROM users WHERE id = :id';
@@ -151,7 +114,7 @@ if ($totalPosts > 0) {
                         <input style='background-color: #202020; font-family: Poppins' type="email" name="email" id="email" placeholder="E-mail" value="<?php echo $user['email']; ?>" class='rounded-3xl px-2.5 py-1.5 mb-4'>
                         <label for="email" class='ml-2 mb-2 text-xs'>LEERJAAR</label>
                         <select style='background-color: #202020; font-family: Poppins' name='school_year' class='px-2 mb-4 py-1.5 rounded-3xl'>
-                            <option value='<?php $user['schoolyear']?>' selected disabled hidden>Leerjaar <?php echo $user['school_year'] ?></option>
+                            <option value='<?php $user['school_year']?>' selected disabled hidden>Leerjaar <?php echo $user['school_year'] ?></option>
                             <option value='1' id='option1'>Leerjaar 1</option>
                             <option value='2' id='option2'>Leerjaar 2</option>
                             <option value='3' id='option3'>Leerjaar 3</option>
@@ -286,23 +249,7 @@ if ($totalPosts > 0) {
 </html>
 
 <?php
-if (isset($_POST['submit'])) {
-    $email = $_POST['email'];
-    $school_year = $_POST['school_year'];
-    $password = $_POST['password'];
-    $img_url = $_POST['img_url'];
-    $description = $_POST['description'];
 
-    $sql = 'UPDATE users SET email = :email, school_year = :school_year, password = :password, img_url = :img_url, description = :description WHERE id = :id';
-    $stmt = $pdo->prepare($sql);
-    $stmt->bindParam(':email', $email);
-    $stmt->bindParam(':school_year', $school_year);
-    $stmt->bindParam(':password', $password);
-    $stmt->bindParam(':img_url', $img_url);
-    $stmt->bindParam(':description', $description);
-    $stmt->bindParam(':id', $_SESSION['user']['id']);
-    $stmt->execute();
-}
 ?>
 
 <style>
