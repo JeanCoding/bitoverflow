@@ -8,17 +8,17 @@ if (!isset($_SESSION['user'])) {
 include './verbinding.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    if (empty($_POST['username'])) {
-        $errors['username'] = 'Naam is verplicht';
-    } elseif (str_word_count($_POST['username']) < 2) {
-        $errors['username'] = 'Naam moet minimaal 2 woorden bevatten';
-    } elseif (str_word_count($_POST['username']) > 2) {
-        $errors['username'] = 'Naam mag maximaal 2 woorden bevatten';
-    } elseif (!preg_match('/^[a-zA-Z ]*$/', $_POST['username'])) {
-        $errors['username'] = 'Naam mag alleen letters bevatten';
-    } else {
-        $username = $_POST['username'];
-    }
+    // if (empty($_POST['username'])) {
+    //     $errors['username'] = 'Naam is verplicht';
+    // } elseif (str_word_count($_POST['username']) < 2) {
+    //     $errors['username'] = 'Naam moet minimaal 2 woorden bevatten';
+    // } elseif (str_word_count($_POST['username']) > 2) {
+    //     $errors['username'] = 'Naam mag maximaal 2 woorden bevatten';
+    // } elseif (!preg_match('/^[a-zA-Z ]*$/', $_POST['username'])) {
+    //     $errors['username'] = 'Naam mag alleen letters bevatten';
+    // } else {
+    //     $username = $_POST['username'];
+    // }
 
     if (empty($_POST['email'])) {
         $errors['email'] = 'Email is verplicht';
@@ -44,22 +44,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $password = $_POST['password'];
     }
 
-    if (empty($errors)) {
-        $sql = "UPDATE users SET first_name = :first_name, last_name = :last_name, email = :email, school_year = :school_year, `password` = :password WHERE id = :id";
-        $stmt = $pdo->prepare($sql);
-        $fullName = explode(' ', $username);
-        $fullName[0] = ucfirst($fullName[0]);
-        $fullName[1] = ucfirst($fullName[1]);
-        $stmt->execute([
-            ':first_name' => $fullName[0],
-            ':last_name' => $fullName[1],
-            ':email' => $email,
-            ':school_year' => $school_year,
-            ':password' => $password,
-            ':id' => $_SESSION['user']['id']
-        ]);
-        $_SESSION['user']['name'] = implode(' ', $fullName);
-    }
+    // if (empty($errors)) {
+    //     $sql = "UPDATE users SET first_name = :first_name, last_name = :last_name, email = :email, school_year = :school_year, `password` = :password WHERE id = :id";
+    //     $stmt = $pdo->prepare($sql);
+    //     $fullName = explode(' ', $username);
+    //     $fullName[0] = ucfirst($fullName[0]);
+    //     $fullName[1] = ucfirst($fullName[1]);
+    //     $stmt->execute([
+    //         ':first_name' => $fullName[0],
+    //         ':last_name' => $fullName[1],
+    //         ':email' => $email,
+    //         ':school_year' => $school_year,
+    //         ':password' => $password,
+    //         ':id' => $_SESSION['user']['id']
+    //     ]);
+    //     $_SESSION['user']['name'] = implode(' ', $fullName);
+    // }
 }
 
 $sql = 'SELECT * FROM users WHERE id = :id';
@@ -151,19 +151,23 @@ if ($totalPosts > 0) {
                         <input style='background-color: #202020; font-family: Poppins' type="email" name="email" id="email" placeholder="E-mail" value="<?php echo $user['email']; ?>" class='rounded-3xl px-2.5 py-1.5 mb-4'>
                         <label for="email" class='ml-2 mb-2 text-xs'>LEERJAAR</label>
                         <select style='background-color: #202020; font-family: Poppins' name='school_year' class='px-2 mb-4 py-1.5 rounded-3xl'>
-                            <option value='1'>Leerjaar 1</option>
-                            <option value='2'>Leerjaar 2</option>
-                            <option value='3'>Leerjaar 3</option>
+                            <option value='<?php $user['schoolyear']?>' selected disabled hidden>Leerjaar <?php echo $user['school_year'] ?></option>
+                            <option value='1' id='option1'>Leerjaar 1</option>
+                            <option value='2' id='option2'>Leerjaar 2</option>
+                            <option value='3' id='option3'>Leerjaar 3</option>
                         </select>
                         <label for="password" class='ml-2 mb-2 text-xs'>WACHTWOORD</label>
                         <input style='background-color: #202020; font-family: Poppins' type="password" name="password" id="password" placeholder="Wachtwoord" value="<?php echo $user['password']; ?>" class='rounded-3xl px-2.5 py-1.5 mb-4'>
                         <label for="profile_picture_url" class='ml-2 mb-2 text-xs'>PROFIELFOTO URL</label>
-                        <input style='background-color: #202020; font-family: Poppins' type="text" name="profile_picture_url" id="profile_picture_url" placeholder="Profielfoto URL" class='rounded-3xl px-2.5 py-1.5 mb-4'>
+                        <input style='background-color: #202020; font-family: Poppins' type="text" name="img_url" id="profile_picture_url" value="<?php echo $user['img_url'] ?>" class='rounded-3xl px-2.5 py-1.5 mb-4'>
                         <label for="biography" class='ml-2 mb-2 text-xs'>BIOGRAFIE</label>
-                        <textarea style='background-color: #202020; font-family: Poppins' name="biography" id="biography" cols="30" rows="10" placeholder="Biografie" class='lg:w-[600px] lg:h-[130px] rounded-2xl px-2.5 py-1.5 mb-4'></textarea>
-                        <div class='lg:w-[600px] flex justify-center py-4 mt-2'><input type="submit" name="submit" value="CHANGE" style='font-family: Laro' class='bg-white rounded-3xl text-black text-xl py-2 px-12 cursor-pointer'></div>
+                        <textarea style='background-color: #202020; font-family: Poppins' name="description" id="biography" cols="30" rows="10" class='lg:w-[600px] lg:h-[130px] rounded-2xl px-2.5 py-1.5 mb-4'><?php echo $user['description']?></textarea>
+                        <div class='lg:w-[600px] flex flex-col lg:flex-row items-center justify-between py-4 mt-2' style='font-family: Laro'>
+                            <input type="submit" name="submit" value="CHANGE" class='bg-white rounded-3xl text-black text-xl py-2 px-12 cursor-pointer mb-5 lg:mb-0'>
+                            <a href='logout.php'><button type='button' class='bg-red-600 rounded-3xl text-white text-xl py-2 px-12 cursor-pointer uppercase'>Uitloggen</button></a>
+                        </div>
                         <div class='absolute right-24 top-24 hidden lg:block'>
-                            <img src='images/big_profile.png'>
+                            <img src='<?php echo $user['img_url'] ?>' class='w-[173px] h-[173px] rounded-full'>
                             <p style='font-family: Poppins' class='text-center mt-4'><?php echo $user['first_name'] . ' ' . $user['last_name']; ?></p>
                         </div>
 
@@ -186,16 +190,17 @@ if ($totalPosts > 0) {
                 <h2 class='text-white text-3xl pb-8' style='font-family: Poppins'>Mijn nieuwste post</h2>
 
                 <div class='mt-6 lg:mt-0 bg-neutral-700 text-white py-8 px-7 mb-20 rounded-3xl flex w-full' style='box-shadow: 0px 4px 40px 2px rgba(0, 0, 0, 0.25);'>
-                    <div class='mr-8 hidden lg:block'><img src='images/profile.png' class='w-24'></div>
-                    <div>
-                        <div class='pb-2 mb-2 border-b-2 bg-black-500' style='border-color: #606060;'>
                             <?php
-                            $query = "SELECT * FROM posts INNER JOIN users ON posts.user_id = users.id ORDER BY posts.id DESC LIMIT 0, 1";
+                            $query = "SELECT * FROM posts INNER JOIN users ON posts.user_id = users.id WHERE users.id = :id ORDER BY posts.id DESC LIMIT 0, 1;";
                             $sql = $pdo->prepare($query);
+                            $sql->bindParam(':id', $_SESSION['user']['id']);
                             $sql->execute();
                             $rows = $sql->fetchAll();
                             foreach ($rows as $row) {
                             ?>
+                    <div class='mr-8 hidden lg:block'><img src='<?php echo $user['img_url'] ?>' class='w-[173px] h-[173px]  rounded-full'></div>
+                    <div>
+                        <div class='pb-2 mb-2 border-b-2 bg-black-500' style='border-color: #606060;'>
                                 <p class='text-zinc-500 font-bold text-xs' style='font-family: Laro'><?php echo $row['date'] ?></p>
                                 <p class='text-white font-bold text-xl lg:text-2xl' style='font-family: Poppins'><?php echo $row['first_name'] ?> <?php echo $row['last_name']; ?></p>
                                 <p class='text-zinc-500 font-bold text-xs uppercase' style='font-family: Laro'><?php echo $row['school_year'] ?>e jaars</p>
@@ -280,6 +285,26 @@ if ($totalPosts > 0) {
 </body>
 
 </html>
+
+<?php
+if (isset($_POST['submit'])) {
+    $email = $_POST['email'];
+    $school_year = $_POST['school_year'];
+    $password = $_POST['password'];
+    $img_url = $_POST['img_url'];
+    $description = $_POST['description'];
+
+    $sql = 'UPDATE users SET email = :email, school_year = :school_year, password = :password, img_url = :img_url, description = :description WHERE id = :id';
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':email', $email);
+    $stmt->bindParam(':school_year', $school_year);
+    $stmt->bindParam(':password', $password);
+    $stmt->bindParam(':img_url', $img_url);
+    $stmt->bindParam(':description', $description);
+    $stmt->bindParam(':id', $_SESSION['user']['id']);
+    $stmt->execute();
+}
+?>
 
 <style>
     @font-face {
