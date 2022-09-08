@@ -36,6 +36,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt = $pdo->prepare($sql);
         $stmt->execute(['post_id' => $_POST['post_id'], 'user_id' => $_POST['user_id'], 'post_user_id' => $_POST['post_user_id']]);
     
-        header('Location: /allpost.php');
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
     }
 }

@@ -90,7 +90,7 @@ include "verbinding.php";
             </div>
             <div class='mt-6 lg:mt-0 bg-neutral-700 text-white py-8 px-7 rounded-3xl flex lg:w-[900px]' style='box-shadow: 0px 4px 40px 2px rgba(0, 0, 0, 0.25);'>
                 <?php
-                $query = "SELECT * FROM posts INNER JOIN users ON posts.user_id = users.id ORDER BY posts.id DESC LIMIT 0, 1;";
+                $query = "SELECT posts.*, users.first_name as first_name, users.last_name as last_name, users.school_year as school_year, users.img_url as img_url FROM posts INNER JOIN users ON posts.user_id = users.id ORDER BY posts.id DESC LIMIT 0, 1;";
                 $sql = $pdo->prepare($query);
                 $sql->execute();
                 $rows = $sql->fetchAll();

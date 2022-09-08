@@ -47,7 +47,7 @@ include "verbinding.php";
                     <?php
                         if (isset($_GET['year'])) {
                             $tag = $_GET['year'];
-                            $sql = 'SELECT * FROM posts 
+                            $sql = 'SELECT posts.*, users.first_name as first_name, users.last_name as last_name, users.school_year as school_year, users.img_url as img_url FROM posts 
                                     INNER JOIN users ON posts.user_id = users.id
                                     INNER JOIN categories ON posts.category_id = categories.id
                                     WHERE users.school_year = :year
@@ -57,7 +57,7 @@ include "verbinding.php";
                             $sql->execute(['year' => $tag]);
                         } elseif (isset($_GET['category'])) {
                             $tag = $_GET['category'];
-                            $sql = 'SELECT * FROM posts 
+                            $sql = 'SELECT posts.*, users.first_name as first_name, users.last_name as last_name, users.school_year as school_year, users.img_url as img_url FROM posts 
                                     INNER JOIN users ON posts.user_id = users.id
                                     INNER JOIN categories ON posts.category_id = categories.id
                                     WHERE categories.name = :category
@@ -65,7 +65,7 @@ include "verbinding.php";
                             $sql = $pdo->prepare($sql);
                             $sql->execute(['category' => $tag]);
                         } else {
-                            $sql = "SELECT * FROM posts INNER JOIN users ON posts.user_id = users.id ORDER BY posts.id DESC";
+                            $sql = "SELECT posts.*, users.first_name as first_name, users.last_name as last_name, users.school_year as school_year, users.img_url as img_url FROM posts INNER JOIN users ON posts.user_id = users.id ORDER BY posts.id DESC";
                             $sql = $pdo->prepare($sql);
                             $sql->execute();
                         }
@@ -82,7 +82,7 @@ include "verbinding.php";
                             $stmt->execute();
                             $downvotes = $stmt->rowCount();
                     ?>
-                    <div class='my-6 lg:mt-0 bg-neutral-700 text-white py-8 px-7 rounded-3xl flex lg:w-[600px]' style='box-shadow: 0px 4px 40px 2px rgba(0, 0, 0, 0.25);'>
+                    <div class='my-6 lg:mt-0 bg-neutral-700 text-white py-8 px-7 rounded-3xl flex lg:w-[560px]' style='box-shadow: 0px 4px 40px 2px rgba(0, 0, 0, 0.25);'>
                         <div class='mr-4 mt-3 hidden lg:block'><img src='<?php echo $row['img_url'] ?>' class='rounded-full w-56'></div>
                         <div>
                             <div class='pb-2 mb-2 border-b-2 bg-black-500' style='border-color: #606060;'>
