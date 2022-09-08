@@ -50,6 +50,15 @@ include "verbinding.php";
                                 $sql->execute();
                                 $rows = $sql->fetchAll();
                                 foreach ($rows as $row) {
+                                    $sql = "SELECT * FROM votes WHERE post_id = {$row['id']} AND score = 1";
+                                    $stmt = $pdo->prepare($sql);
+                                    $stmt->execute();
+                                    $upvotes = $stmt->rowCount();
+                    
+                                    $sql = "SELECT * FROM votes WHERE post_id = {$row['id']} AND score = 0";
+                                    $stmt = $pdo->prepare($sql);
+                                    $stmt->execute();
+                                    $downvotes = $stmt->rowCount();
                                 ?>
                     <div class='mt-6 lg:mt-0 bg-neutral-700 text-white py-8 px-7 rounded-3xl flex lg:w-[600px]' style='box-shadow: 0px 4px 40px 2px rgba(0, 0, 0, 0.25);'>
                         <div class='mr-4 mt-3 hidden lg:block'><img src='images/profile.png' class='w-64'></div>
@@ -72,14 +81,21 @@ include "verbinding.php";
                                     <?php echo htmlspecialchars($row['code']); ?>
                                 </code>
                             </div>
-                            <form method='POST'>
+                            <form method='POST' action="/posts/actions/vote.php">
+                                <input type="hidden" name="post_id" value="<?php echo $row['id'] ?>">
+                                <input type="hidden" name="post_user_id" value="<?php echo $row['user_id'] ?>">
+                                <input type="hidden" name="user_id" value="<?php echo $_SESSION['user']['id'] ?>">
                                 <div class='w-full flex justify-between items-center mt-12 text-3xl font-bold'>
                                     <div class='flex'>
-                                        <button type='submit' name='upvote'><span class='w-10 h-10 lg:w-12 lg:h-12 p-2 flex items-center justify-center font-bold text-2xl rounded-full mr-6 ml-2' style='background: #5BFF61'><img src='icons/up_arrow.svg'></span></button>
-                                        <span class='w-10 h-10 cursor-pointer lg:w-12 lg:h-12 p-2 flex items-center justify-center font-bold text-2xl rounded-full' style='background: #FF5959'><img src='icons/down_arrow.svg'></span>
+                                        <button type='submit' name='upvote'
+                                            <?php if ($row['user_id'] == $_SESSION['user']['id']) echo 'disabled'; ?>
+                                        ><span class='w-10 h-10 lg:w-12 lg:h-12 p-2 flex items-center justify-center font-bold text-2xl rounded-full mr-6 ml-2' style='background: #5BFF61'><img src='icons/up_arrow.svg'></span></button>
+                                        <button type="submit" name="downvote"
+                                            <?php if ($row['user_id'] == $_SESSION['user']['id']) echo 'disabled'; ?>
+                                        ><span class='w-10 h-10 cursor-pointer lg:w-12 lg:h-12 p-2 flex items-center justify-center font-bold text-2xl rounded-full' style='background: #FF5959'><img src='icons/down_arrow.svg'></span></button>
                                         <span class='px-4 py-1 flex items-center justify-center font-bold text-xl lg:text-2xl rounded-3xl ml-6' id='score' style=' font-family: Poppins'><span id='operator'></span>
                                         <?php
-                                        $score = 6;
+                                        $score = $upvotes - $downvotes;
                                         if ($score >= 0) {
                                             echo "<script>document.getElementById('score').style.background = '#5BFF61'</script>";
                                             echo "<script>document.getElementById('operator').innerText = '+'</script>";

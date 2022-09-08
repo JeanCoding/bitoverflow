@@ -64,5 +64,5 @@ CREATE TABLE scores (
     FOREIGN KEY (post_id) REFERENCES posts(id)
 );
 
-INSERT INTO users (first_name, last_name, school_year, email, password) VALUES ('Admin', 'Bitoverflow', 2, 'admin@bitoverflow.nl', 'admin');
+INSERT INTO users (first_name, last_name, img_url, school_year, email, password) VALUES ('Admin', 'Bitoverflow', '', 2, 'admin@bitoverflow.nl', 'admin');
 INSERT INTO categories (name) VALUES ('PHP'), ('MySQL'), ('HTML'), ('CSS'), ('JavaScript');

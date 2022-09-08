@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $userId = $row['id'];
                 $_SESSION['user']['name'] = $username;
                 $_SESSION['user']['id'] = $userId;
-                header('Location: index.php');
+                header('Location: home.php');
             } else {
                 echo "<script>alert('Verkeerd gebruikersnaam en/of wachtwoord!');</script>";
             }

@@ -69,7 +69,7 @@ $stmt->execute();
 
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-$sql = 'SELECT * FROM votes WHERE comment_user_id = :id AND vote = 1';
+$sql = 'SELECT * FROM votes WHERE post_user_id = :id AND score = 1';
 $stmt = $pdo->prepare($sql);
 $stmt->bindParam(':id', $_SESSION['user']['id']);
 $stmt->execute();
@@ -197,6 +197,15 @@ if ($totalPosts > 0) {
                             $sql->execute();
                             $rows = $sql->fetchAll();
                             foreach ($rows as $row) {
+                                $sql = "SELECT * FROM votes WHERE post_id = {$row['id']} AND score = 1";
+                                $stmt = $pdo->prepare($sql);
+                                $stmt->execute();
+                                $upvotes = $stmt->rowCount();
+                
+                                $sql = "SELECT * FROM votes WHERE post_id = {$row['id']} AND score = 0";
+                                $stmt = $pdo->prepare($sql);
+                                $stmt->execute();
+                                $downvotes = $stmt->rowCount();
                             ?>
                     <div class='mr-8 hidden lg:block'><img src='<?php echo $user['img_url'] ?>' class='w-[173px] h-[173px]  rounded-full'></div>
                     <div>
@@ -221,11 +230,9 @@ if ($totalPosts > 0) {
                         <form method='POST'>
                             <div class='w-full flex justify-between items-center mt-12 text-3xl font-bold'>
                                 <div class='flex'>
-                                    <button type='submit' name='upvote'><span class='w-10 h-10 lg:w-12 lg:h-12 p-2 flex items-center justify-center font-bold text-2xl rounded-full mr-6 ml-2' style='background: #5BFF61'><img src='icons/up_arrow.svg'></span></button>
-                                    <span class='w-10 h-10 lg:w-12 lg:h-12 p-2 flex items-center justify-center font-bold text-2xl rounded-full' style='background: #FF5959'><img src='icons/down_arrow.svg'></span>
                                     <span class='px-4 py-1 flex items-center justify-center font-bold text-xl lg:text-2xl rounded-3xl ml-6' id='score' style=' font-family: Poppins'><span id='operator'></span>
                                     <?php
-                                    $score = 6;
+                                    $score = $upvotes - $downvotes;
                                     if ($score >= 0) {
                                         echo "<script>document.getElementById('score').style.background = '#5BFF61'</script>";
                                         echo "<script>document.getElementById('operator').innerText = '+'</script>";
@@ -244,19 +251,6 @@ if ($totalPosts > 0) {
                             </div>
                     </div>
                 </div>
-                <!-- <div>
-            <h2>Jou meest recente post</h2>
-            <?php
-            if (isset($lastPost)) { ?>
-                    <p><b>Geplaatst op:</b> <?php echo $lastPost['date']; ?></p>
-                    <p><b>Geplaatst door:</b> <?php echo $lastPost['username']; ?></p>
-                    <p><b>Categorie:</b> <?php echo $lastPost['category']; ?></p>
-                    <p><b>Onderwerp:</b> <?php echo $lastPost['subject']; ?></p>
-                    <p><b>Omschrijving:</b> <?php echo $lastPost['content']; ?></p>   
-                <?php } else { ?>
-                    <p>Je hebt nog geen posts geplaatst.</p>
-                <?php } ?>
-        </div> -->
 
             </div>
             <div class='bg-neutral-700 text-white py-8 px-7 hidden lg:block rounded-3xl lg:w-[345px] lg:h-[685px] top-48 absolute right-16' style='font-family: Poppins; box-shadow: 0px 4px 40px 2px rgba(0, 0, 0, 0.25);'>
