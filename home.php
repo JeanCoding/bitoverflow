@@ -42,7 +42,15 @@ include "verbinding.php";
             </aside>
         </div>
         <div class='px-4 lg:pl-16 pt-8 bg-neutral-900 pb-12 md:pb-48 w-full' style='box-shadow: 0px 4px 40px 2px rgba(0, 0, 0, 0.25);'>
-            <h2 class='text-white  text-2xl lg:text-4xl mb-6 lg:ml-7' style='font-family: Poppins'>Goedemorgen Jean!</h2>
+        <?php
+                                $query = "SELECT * FROM users WHERE id = :id";
+                                $sql = $pdo->prepare($query);
+                                $sql->bindParam('id', $_SESSION['user']['id']);
+                                $sql->execute();
+                                $rows = $sql->fetchAll();
+                                foreach ($rows as $row) {
+                                ?>
+            <h2 class='text-white  text-2xl lg:text-4xl mb-6 lg:ml-7' style='font-family: Poppins'>Goedemorgen <?php echo $row['first_name']; }?>!</h2>
             <div class='bg-neutral-700 text-white py-8 px-7 rounded-3xl lg:w-[900px]' style='font-family: Poppins'>
                 <h3 class='text-base lg:text-2xl font'>Wat zijn vandaag de trending topics?</h3>
                 <div class='mt-8 flex justify-between'>

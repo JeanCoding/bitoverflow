@@ -167,7 +167,7 @@ if ($totalPosts > 0) {
                             <a href='logout.php'><button type='button' class='bg-red-600 rounded-3xl text-white text-xl py-2 px-12 cursor-pointer uppercase'>Uitloggen</button></a>
                         </div>
                         <div class='absolute right-24 top-24 hidden lg:block'>
-                            <img src='<?php echo $user['img_url'] ?>' class='w-[173px] h-[173px] rounded-full'>
+                            <img src='<?php echo $user['img_url'] ?>' class='rounded-full'>
                             <p style='font-family: Poppins' class='text-center mt-4'><?php echo $user['first_name'] . ' ' . $user['last_name']; ?></p>
                         </div>
 
@@ -198,7 +198,7 @@ if ($totalPosts > 0) {
                             $rows = $sql->fetchAll();
                             foreach ($rows as $row) {
                             ?>
-                    <div class='mr-8 hidden lg:block'><img src='<?php echo $user['img_url'] ?>' class='w-[173px] h-[173px]  rounded-full'></div>
+                    <div class='mr-8 hidden lg:block'><img src='<?php echo $user['img_url'] ?>' class='rounded-full'></div>
                     <div>
                         <div class='pb-2 mb-2 border-b-2 bg-black-500' style='border-color: #606060;'>
                                 <p class='text-zinc-500 font-bold text-xs' style='font-family: Laro'><?php echo $row['date'] ?></p>
