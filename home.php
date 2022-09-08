@@ -57,9 +57,6 @@ include "verbinding.php";
                 <a href="posts/create.php"><button class='text-sm lg:text-lg text-white px-5 py-1 rounded-full h-12 font-bold hover:bg-blue-700 ease-in-out duration-300 bg-blue-900' style='font-family: Poppins'>Stel een vraag!</button></a>
             </div>
             <div class='mt-6 lg:mt-0 bg-neutral-700 text-white py-8 px-7 rounded-3xl flex lg:w-[900px]' style='box-shadow: 0px 4px 40px 2px rgba(0, 0, 0, 0.25);'>
-                <div class='mr-8 hidden lg:block'><img src='images/profile.png' class='w-24'></div>
-                <div>
-                    <div class='pb-2 mb-2 border-b-2 bg-black-500' style='border-color: #606060;'>
                     <?php
                     $query = "SELECT * FROM posts INNER JOIN users ON posts.user_id = users.id ORDER BY posts.id DESC LIMIT 0, 1;";
                     $sql = $pdo->prepare($query);
@@ -67,6 +64,9 @@ include "verbinding.php";
                     $rows = $sql->fetchAll();
                     foreach ($rows as $row) {
                         ?>
+                <div class='mr-8 hidden lg:block'><img src='<?php echo $row['img_url'] ?>' class='w-24 rounded-3xl'></div>
+                <div>
+                    <div class='pb-2 mb-2 border-b-2 bg-black-500' style='border-color: #606060;'>
                         <p class='text-zinc-500 font-bold text-xs' style='font-family: Laro'><?php echo $row['date'] ?></p>
                         <p class='text-white font-bold text-xl lg:text-2xl' style='font-family: Poppins'><?php echo $row['first_name']?> <?php echo $row['last_name'];?></p>
                         <p class='text-zinc-500 font-bold text-xs uppercase' style='font-family: Laro'><?php echo $row['school_year']?>e jaars</p>
