@@ -162,8 +162,8 @@ if ($totalPosts > 0) {
                         <input style='background-color: #202020; font-family: Poppins' type="text" name="img_url" id="profile_picture_url" value="<?php echo $user['img_url'] ?>" class='rounded-3xl px-2.5 py-1.5 mb-4'>
                         <label for="biography" class='ml-2 mb-2 text-xs'>BIOGRAFIE</label>
                         <textarea style='background-color: #202020; font-family: Poppins' name="description" id="biography" cols="30" rows="10" class='lg:w-[600px] lg:h-[130px] rounded-2xl px-2.5 py-1.5 mb-4'><?php echo $user['description']?></textarea>
-                        <div class='lg:w-[600px] flex justify-between py-4 mt-2' style='font-family: Laro'>
-                            <input type="submit" name="submit" value="CHANGE" class='bg-white rounded-3xl text-black text-xl py-2 px-12 cursor-pointer'>
+                        <div class='lg:w-[600px] flex flex-col lg:flex-row items-center justify-between py-4 mt-2' style='font-family: Laro'>
+                            <input type="submit" name="submit" value="CHANGE" class='bg-white rounded-3xl text-black text-xl py-2 px-12 cursor-pointer mb-5 lg:mb-0'>
                             <a href='logout.php'><button type='button' class='bg-red-600 rounded-3xl text-white text-xl py-2 px-12 cursor-pointer uppercase'>Uitloggen</button></a>
                         </div>
                         <div class='absolute right-24 top-24 hidden lg:block'>
