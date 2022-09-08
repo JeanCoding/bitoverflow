@@ -167,7 +167,7 @@ if ($totalPosts > 0) {
                             <a href='logout.php'><button type='button' class='bg-red-600 rounded-3xl text-white text-xl py-2 px-12 cursor-pointer uppercase'>Uitloggen</button></a>
                         </div>
                         <div class='absolute right-24 top-24 hidden lg:block'>
-                            <img src='<?php echo $user['img_url'] ?>' class='rounded-full'>
+                            <img src='<?php echo $user['img_url'] ?>' class='rounded-full w-48 h-48'>
                             <p style='font-family: Poppins' class='text-center mt-4'><?php echo $user['first_name'] . ' ' . $user['last_name']; ?></p>
                         </div>
 
