@@ -86,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
         <div class='px-4 lg:pl-10 pt-8 bg-neutral-900 pb-12 md:pb-48 w-full' style='box-shadow: 0px 4px 40px 2px rgba(0, 0, 0, 0.25);'>
             <h2 class='text-white  text-2xl lg:text-4xl mb-6' style='font-family: Poppins'>Stel hier een vraag Jean!</h2>
-            <div class='bg-neutral-700 text-white py-6 lg:py-8 px-7 rounded-3xl lg:w-[900px]' style='font-family: Poppins'>
+            <div class='bg-neutral-700 text-white py-6 lg:py-8 px-7 rounded-3xl xl:w-[850px] 2xl:w-[900px]' style='font-family: Poppins'>
                 <div class='mt-2 flex'>
                     <div>
                         <div class='flex items-center'><span class='flex items-center justify-center mt-4 font-bold text-2xl rounded-full'><img src='../images/profile.png' class='pr-2'></span></div>

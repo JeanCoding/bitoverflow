@@ -62,7 +62,7 @@ include "verbinding.php";
                     </div>
                 </div>
             </div>
-            <div class='bg-neutral-700 text-white py-2 px-7 rounded-3xl lg:w-[345px] lg:h-[298px] top-40 xl:absolute right-0 mt-8 xl:mt-0 xl:mr-4 xl:block' style='font-family: Poppins; box-shadow: 0px 4px 40px 2px rgba(0, 0, 0, 0.25);'>
+            <div class='bg-neutral-700 text-white py-2 px-7 hidden 2xl:block rounded-3xl lg:w-[345px] lg:h-[298px] top-40 xl:absolute right-0 mt-8 xl:mt-0 xl:mr-4' style='font-family: Poppins; box-shadow: 0px 4px 40px 2px rgba(0, 0, 0, 0.25);'>
                 <h3 class='text-xl flex justify-center lg:text-3xl ml-3 mt-3 font-bold pl-2' style='font-family: Poppins;'>Bekijk alle posts</h3>
                 <h3 class='text-xl flex justify-center text-xs ml-3 mt-2 font-bold pl-2 text-neutral-500 text-center' style='font-family: Laro;'>VAN IEDEREEN & ELK LEERJAAR</h3>
                 <div class='flex justify-center items-center'><span class='bg-green-500 w-16 h-16 p-2 mt-10 lg:ml-4 ml-2 flex items-center justify-center font-bold text-4xl rounded-full'><?php 
@@ -77,6 +77,7 @@ include "verbinding.php";
             </div>
             <div class='text-white px-1 lg:px-7 rounded-3xl lg:flex justify-between items-center w-full lg:w-[900px]'>
                 <h2 class='text-white font-bold text-xl lg:text-3xl my-10' style='font-family: Poppins'>Wie is er op zoek naar hulp?</h2>
+                <a href="allpost.php"><button class='text-sm lg:text-lg text-white px-5 py-1 block 2xl:hidden rounded-full h-12 font-bold hover:bg-blue-700 ease-in-out duration-300 bg-blue-900' style='font-family: Poppins'>Alle Posts!</button></a>
                 <a href="posts/create.php"><button class='text-sm lg:text-lg text-white px-5 py-1 rounded-full h-12 font-bold hover:bg-blue-700 ease-in-out duration-300 bg-blue-900' style='font-family: Poppins'>Stel een vraag!</button></a>
             </div>
             <div class='mt-6 lg:mt-0 bg-neutral-700 text-white py-8 px-7 rounded-3xl flex lg:w-[900px]' style='box-shadow: 0px 4px 40px 2px rgba(0, 0, 0, 0.25);'>
