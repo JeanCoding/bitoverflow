@@ -51,6 +51,7 @@ CREATE TABLE votes (
     score int(11) NOT NULL,
     post_id int(11) NOT NULL,
     user_id int(11) NOT NULL,
+    post_user_id int(11) NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (user_id) REFERENCES users(id),
     FOREIGN KEY (post_id) REFERENCES posts(id)
