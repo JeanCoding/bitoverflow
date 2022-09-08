@@ -214,8 +214,13 @@ if ($totalPosts > 0) {
                                 <p class='text-white font-bold text-xl lg:text-2xl' style='font-family: Poppins'><?php echo $row['first_name'] ?> <?php echo $row['last_name']; ?></p>
                                 <p class='text-zinc-500 font-bold text-xs uppercase' style='font-family: Laro'><?php echo $row['school_year'] ?>e jaars</p>
                         </div>
-                        <span class='rounded-2xl bg-black px-6 py-1 font-bold text-center mr-2 text-xs' id='tag'>PHP</span>
-                        <span class='rounded-2xl bg-black px-6 py-1 font-bold text-center text-xs' id='tag'>SESSIONS</span>
+                        <?php 
+                                $sql = 'SELECT * FROM categories WHERE id = ' . $row['category_id'];
+                                $stmt = $pdo->prepare($sql);
+                                $stmt->execute();
+                                $category = $stmt->fetch();
+                                echo '<span class="rounded-2xl bg-black px-6 py-1 font-bold text-center text-xs" id="tag"> ' . $category['name'] . '</span>';
+                        ?>
                         <p class='text-zinc-500 font-bold text-xs mt-6 uppercase' style='font-family: Laro'>Onderwerp:</p>
                         <p class='text-white font-bold lg:text-xl break-all' style='font-family: Poppins'><?php echo $row['subject']; ?></p>
                         <p class='text-zinc-500 font-bold text-xs mt-6 uppercase' style='font-family: Laro'>Beschrijving:</p>

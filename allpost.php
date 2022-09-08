@@ -29,37 +29,59 @@ include "verbinding.php";
                 <div class='bg-neutral-700 pl-3 uppercase'>CATEGORIEËN</div>
                 <a href="home.php"><button class='pl-3 flex items-center my-2 cursor-pointer hover:text-gray-300 ease-in-out duration-300'><img src='icons/house.svg' class='pr-2'>Home</button></a>
                 <div class='bg-neutral-700 pl-3 uppercase'>Leerjaren</div>
-                <div class='border-b-2 border-neutral-700'><button class='py-2 pl-3 flex items-center mt-1 hover:text-gray-300 ease-in-out duration-300'><img src='icons/leerjaar1.svg' class='pr-2'>1e jaar</button></div>
-                <div class='border-b-2 border-neutral-700'><button class='py-2 pl-3 flex items-center pt-2 hover:text-gray-300 ease-in-out duration-300'><img src='icons/leerjaar2.svg' class='pr-2'>2e jaar</button></div>
-                <button class='pl-3 py-2 flex items-center hover:text-gray-300 ease-in-out duration-300'><img src='icons/leerjaar3.svg' class='pr-2'>3e jaar</button>
+                <a href="/allpost.php?year=1"><div class='border-b-2 border-neutral-700'><button class='py-2 pl-3 flex items-center mt-1 hover:text-gray-300 ease-in-out duration-300'><img src='icons/leerjaar1.svg' class='pr-2'>1e jaar</button></div></a>
+                <a href="/allpost.php?year=2"><div class='border-b-2 border-neutral-700'><button class='py-2 pl-3 flex items-center pt-2 hover:text-gray-300 ease-in-out duration-300'><img src='icons/leerjaar2.svg' class='pr-2'>2e jaar</button></div></a>
+                <a href="/allpost.php?year=3"><button class='pl-3 py-2 flex items-center hover:text-gray-300 ease-in-out duration-300'><img src='icons/leerjaar3.svg' class='pr-2'>3e jaar</button></a>
                 <div class='bg-neutral-700 pl-3 uppercase'>Talen</div>
-                <div class='border-b-2 border-neutral-700'><button class='py-2 pl-3 flex items-center mt-1 hover:text-gray-300 ease-in-out duration-300'><img src='icons/leerjaar1.svg' class='pr-2'>PHP</button></div>
-                <div class='border-b-2 border-neutral-700'><button class='py-2 pl-3 flex items-center pt-2 hover:text-gray-300 ease-in-out duration-300'><img src='icons/leerjaar2.svg' class='pr-2'>JAVASCRIPT</button></div>
-                <div class='border-b-2 border-neutral-700'><button class='py-2 pl-3 flex items-center mt-1 hover:text-gray-300 ease-in-out duration-300'><img src='icons/leerjaar1.svg' class='pr-2'>PYTHON</button></div>
-                <div class='border-b-2 border-neutral-700'><button class='py-2 pl-3 flex items-center pt-2 hover:text-gray-300 ease-in-out duration-300'><img src='icons/leerjaar2.svg' class='pr-2'>LARAVEL</button></div>
-                <div class='border-b-2 border-neutral-700'><button class='py-2 pl-3 flex items-center mt-1 hover:text-gray-300 ease-in-out duration-300'><img src='icons/leerjaar1.svg' class='pr-2'>HTML</button></div>
-                <button class='py-2 pl-3 flex items-center pt-2 hover:text-gray-300 ease-in-out duration-300'><img src='icons/leerjaar2.svg' class='pr-2'>CSS</button>
+                <a href="/allpost.php?category=PHP"><div class='border-b-2 border-neutral-700'><button class='py-2 pl-3 flex items-center mt-1 hover:text-gray-300 ease-in-out duration-300'><img src='icons/leerjaar1.svg' class='pr-2'>PHP</button></div></a>
+                <a href="/allpost.php?category=JavaScript"><div class='border-b-2 border-neutral-700'><button class='py-2 pl-3 flex items-center pt-2 hover:text-gray-300 ease-in-out duration-300'><img src='icons/leerjaar2.svg' class='pr-2'>JAVASCRIPT</button></div></a>
+                <a href="/allpost.php?category=Python"><div class='border-b-2 border-neutral-700'><button class='py-2 pl-3 flex items-center mt-1 hover:text-gray-300 ease-in-out duration-300'><img src='icons/leerjaar1.svg' class='pr-2'>PYTHON</button></div></a>
+                <a href="/allpost.php?category=Laravel"><div class='border-b-2 border-neutral-700'><button class='py-2 pl-3 flex items-center pt-2 hover:text-gray-300 ease-in-out duration-300'><img src='icons/leerjaar2.svg' class='pr-2'>LARAVEL</button></div></a>
+                <a href="/allpost.php?category=HTML"><div class='border-b-2 border-neutral-700'><button class='py-2 pl-3 flex items-center mt-1 hover:text-gray-300 ease-in-out duration-300'><img src='icons/leerjaar1.svg' class='pr-2'>HTML</button></div></a>
+                <a href="/allpost.php?category=CSS"><button class='py-2 pl-3 flex items-center pt-2 hover:text-gray-300 ease-in-out duration-300'><img src='icons/leerjaar2.svg' class='pr-2'>CSS</button></a>
             </aside>
         </div>
         <div class='px-4 lg:pl-16 pt-8 bg-neutral-900 pb-12 md:pb-48 w-full' style='box-shadow: 0px 4px 40px 2px rgba(0, 0, 0, 0.25);'>
             <h2 class='text-white  text-2xl lg:text-4xl mb-6 mt-6' style='font-family: Poppins'>Bekijk alle recente posts</h2>
             <div class="lg:grid grid-cols-2">
-                                <?php
-                                $query = "SELECT * FROM posts INNER JOIN users ON posts.user_id = users.id ORDER BY posts.id DESC";
-                                $sql = $pdo->prepare($query);
-                                $sql->execute();
-                                $rows = $sql->fetchAll();
-                                foreach ($rows as $row) {
-                                    $sql = "SELECT * FROM votes WHERE post_id = {$row['id']} AND score = 1";
-                                    $stmt = $pdo->prepare($sql);
-                                    $stmt->execute();
-                                    $upvotes = $stmt->rowCount();
-                    
-                                    $sql = "SELECT * FROM votes WHERE post_id = {$row['id']} AND score = 0";
-                                    $stmt = $pdo->prepare($sql);
-                                    $stmt->execute();
-                                    $downvotes = $stmt->rowCount();
-                                ?>
+                    <?php
+                        if (isset($_GET['year'])) {
+                            $tag = $_GET['year'];
+                            $sql = 'SELECT * FROM posts 
+                                    INNER JOIN users ON posts.user_id = users.id
+                                    INNER JOIN categories ON posts.category_id = categories.id
+                                    WHERE users.school_year = :year
+                                    ORDER BY posts.id DESC';
+
+                            $sql = $pdo->prepare($sql);
+                            $sql->execute(['year' => $tag]);
+                        } elseif (isset($_GET['category'])) {
+                            $tag = $_GET['category'];
+                            $sql = 'SELECT * FROM posts 
+                                    INNER JOIN users ON posts.user_id = users.id
+                                    INNER JOIN categories ON posts.category_id = categories.id
+                                    WHERE categories.name = :category
+                                    ORDER BY posts.id DESC';
+                            $sql = $pdo->prepare($sql);
+                            $sql->execute(['category' => $tag]);
+                        } else {
+                            $sql = "SELECT * FROM posts INNER JOIN users ON posts.user_id = users.id ORDER BY posts.id DESC";
+                            $sql = $pdo->prepare($sql);
+                            $sql->execute();
+                        }
+                
+                        $rows = $sql->fetchAll();
+                        foreach ($rows as $row) {
+                            $sql = "SELECT * FROM votes WHERE post_id = {$row['id']} AND score = 1";
+                            $stmt = $pdo->prepare($sql);
+                            $stmt->execute();
+                            $upvotes = $stmt->rowCount();
+            
+                            $sql = "SELECT * FROM votes WHERE post_id = {$row['id']} AND score = 0";
+                            $stmt = $pdo->prepare($sql);
+                            $stmt->execute();
+                            $downvotes = $stmt->rowCount();
+                    ?>
                     <div class='my-6 lg:mt-0 bg-neutral-700 text-white py-8 px-7 rounded-3xl flex lg:w-[600px]' style='box-shadow: 0px 4px 40px 2px rgba(0, 0, 0, 0.25);'>
                         <div class='mr-4 mt-3 hidden lg:block'><img src='<?php echo $row['img_url'] ?>' class='rounded-full w-56'></div>
                         <div>
@@ -68,8 +90,13 @@ include "verbinding.php";
                                     <p class='text-white font-bold text-xl lg:text-2xl' style='font-family: Poppins'><?php echo $row['first_name'] ?> <?php echo $row['last_name']; ?></p>
                                     <p class='text-zinc-500 font-bold text-xs uppercase' style='font-family: Laro'><?php echo $row['school_year'] ?>e jaars</p>
                             </div>
-                            <span class='rounded-2xl bg-black px-6 py-1 font-bold text-center mr-2 text-xs' id='tag'>PHP</span>
-                            <span class='rounded-2xl bg-black px-6 py-1 font-bold text-center text-xs' id='tag'>SESSIONS</span>
+                            <?php 
+                                $sql = 'SELECT * FROM categories WHERE id = ' . $row['category_id'];
+                                $stmt = $pdo->prepare($sql);
+                                $stmt->execute();
+                                $category = $stmt->fetch();
+                                echo '<span class="rounded-2xl bg-black px-6 py-1 font-bold text-center text-xs" id="tag"> ' . $category['name'] . '</span>';
+                            ?>
                             <p class='text-zinc-500 font-bold text-xs mt-6 uppercase' style='font-family: Laro'>Onderwerp:</p>
                             <p class='text-white font-bold lg:text-xl break-all' style='font-family: Poppins'><?php echo $row['subject']; ?></p>
                             <p class='text-zinc-500 font-bold text-xs mt-6 uppercase' style='font-family: Laro'>Beschrijving:</p>
